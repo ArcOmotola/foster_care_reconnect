@@ -107,7 +107,7 @@ class Database
      *
      * @return void
      */
-    private function createCustomerTable()
+    private function createFosterTable()
     {
         $sql = "CREATE TABLE IF NOT EXISTS customers (
                 id INT AUTO_INCREMENT PRIMARY KEY,
