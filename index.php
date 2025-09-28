@@ -1,8 +1,7 @@
 <?php
-require_once('includes/config/path.php');
-require_once('includes/config/path.php');
-require_once(ROOT_PATH . 'includes/header.php');
-require_once(ROOT_PATH . 'includes/function.php');
+require_once 'includes/config/path.php';
+require_once ROOT_PATH.'includes/header.php';
+require_once ROOT_PATH.'includes/function.php';
 $db = new Database();
 ?>
 
@@ -10,15 +9,14 @@ $db = new Database();
 
   <!-- Main Wrapper -->
   <div class="main-wrapper">
-
     <!-- Header -->
     <?php
-    require_once(ROOT_PATH . 'includes/header.php');
-    ?>
+    require_once ROOT_PATH.'includes/header.php';
+?>
     <!-- /Header -->
-    <?php
-    require_once(ROOT_PATH . 'includes/nav.php');
-    ?>
+<?php
+require_once ROOT_PATH.'includes/nav.php';
+?>
     <!-- Home Banner -->
     <section class="section section-search">
       <div class="container-fluid">
@@ -592,16 +590,16 @@ $db = new Database();
 
     <!-- Footer -->
     <?php
-    require_once(ROOT_PATH . 'includes/footer.php');
-    ?>
+require_once ROOT_PATH.'includes/footer.php';
+?>
     <!-- /Footer -->
 
   </div>
   <!-- /Main Wrapper -->
 
   <?php
-  require_once(ROOT_PATH . 'includes/script.php');
-  ?>
+  require_once ROOT_PATH.'includes/script.php';
+?>
 
 </body>
 
