@@ -81,14 +81,22 @@ class Database
      *
      * @return void
      */
-    private function createBinCategoryTable()
+    private function createFosterHomeTable()
     {
-        $sql = 'CREATE TABLE IF NOT EXISTS bin_categories (
+        $sql = 'CREATE TABLE IF NOT EXISTS foster_home (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            category_name VARCHAR(255) NOT NULL,
+            foster_name VARCHAR(255) NOT NULL,
+            country_id VARCHAR(255) NOT NULL,
+            state_id VARCHAR(255) NOT NULL,
+            address VARCHAR(255) NOT NULL,
+            contact_number VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
             description VARCHAR(255) NOT NULL,
             status BOOLEAN DEFAULT TRUE,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE CASCADE,
+            FOREIGN KEY (state_id) REFERENCES states(id) ON DELETE CASCADE,
         )';
         $this->pdo->exec($sql);
     }

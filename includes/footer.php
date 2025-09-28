@@ -44,9 +44,8 @@
                     <div class="footer-widget footer-menu">
                         <h2 class="footer-title">For Foster</h2>
                         <ul>
-                            <li><a href="search.html"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-                            <li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                            <li><a href="register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
+                            <li><a href="login.php"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                            <li><a href="register.php"><i class="fas fa-angle-double-right"></i> Register</a></li>
                             
                         </ul>
                     </div>
@@ -60,8 +59,8 @@
                     <div class="footer-widget footer-menu">
                         <h2 class="footer-title">For Agent</h2>
                         <ul>
-                            <li><a href="chat.html"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-                            <li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                            <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
+                            <li><a href="/login.php"><i class="fas fa-angle-double-right"></i> Login</a></li>
                             
                         </ul>
                     </div>
@@ -85,7 +84,7 @@
                             </p>
                             <p class="mb-0">
                                 <i class="fas fa-envelope"></i>
-                                doccure@example.com
+                                foster@info.com
                             </p>
                         </div>
                     </div>

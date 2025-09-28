@@ -3,6 +3,8 @@ require_once 'includes/config/path.php';
 require_once ROOT_PATH.'includes/header.php';
 require_once ROOT_PATH.'includes/function.php';
 $db = new Database();
+$state_sql = "SELECT name FROM states WHERE country_id = 231 ORDER BY RAND() LIMIT 4";
+$result = $db->fetchAll($state_sql);
 ?>
 
 <body>
@@ -23,7 +25,7 @@ require_once ROOT_PATH.'includes/nav.php';
         <div class="banner-wrapper">
           <div class="banner-header text-center">
             <h1>Search Foster, Connect with friends</h1>
-            <p>Discover the best doctors, clinic & hospital the city nearest to you.</p>
+            <p>Discover the old friends of the city nearest to you.</p>
           </div>
 
           <!-- Search -->
@@ -34,8 +36,8 @@ require_once ROOT_PATH.'includes/nav.php';
                 <span class="form-text">Based on your Location</span>
               </div>
               <div class="form-group search-info">
-                <input type="text" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
-                <span class="form-text">Ex : Dental or Sugar Check up etc</span>
+                <input type="text" class="form-control" placeholder="Search friend">
+                <span class="form-text">Ex : Year of admission, name, city</span>
               </div>
               <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
             </form>
@@ -51,7 +53,7 @@ require_once ROOT_PATH.'includes/nav.php';
     <section class="section section-specialities">
       <div class="container-fluid">
         <div class="section-header text-center">
-          <h2>Clinic and Specialities</h2>
+          <h2>City we covers</h2>
           <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
         <div class="row justify-content-center">
@@ -60,54 +62,22 @@ require_once ROOT_PATH.'includes/nav.php';
             <div class="specialities-slider slider">
 
               <!-- Slider Item -->
-              <div class="speicality-item text-center">
-                <div class="speicality-img">
-                  <img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                </div>
-                <p>Urology</p>
-              </div>
+               <?php
+               if (empty($result)) { ?>
+                <h1>No Data available</h1>
+               <?php }
+                foreach ($result as $state) { ?>
+                  <div class="speicality-item text-center">
+                    <div class="speicality-img">
+                      <img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">
+                      <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                    </div>
+                    <p><?= $state['name']?></p>
+                  </div>
+                <?php } ?>
               <!-- /Slider Item -->
 
-              <!-- Slider Item -->
-              <div class="speicality-item text-center">
-                <div class="speicality-img">
-                  <img src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                </div>
-                <p>Neurology</p>
-              </div>
-              <!-- /Slider Item -->
-
-              <!-- Slider Item -->
-              <div class="speicality-item text-center">
-                <div class="speicality-img">
-                  <img src="assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                </div>
-                <p>Orthopedic</p>
-              </div>
-              <!-- /Slider Item -->
-
-              <!-- Slider Item -->
-              <div class="speicality-item text-center">
-                <div class="speicality-img">
-                  <img src="assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality">
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                </div>
-                <p>Cardiologist</p>
-              </div>
-              <!-- /Slider Item -->
-
-              <!-- Slider Item -->
-              <div class="speicality-item text-center">
-                <div class="speicality-img">
-                  <img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                </div>
-                <p>Dentist</p>
-              </div>
-              <!-- /Slider Item -->
+              
 
             </div>
             <!-- /Slider -->
@@ -124,7 +94,7 @@ require_once ROOT_PATH.'includes/nav.php';
         <div class="row">
           <div class="col-lg-4">
             <div class="section-header ">
-              <h2>Book Our Doctor</h2>
+              <h2>Foster you may know</h2>
               <p>Lorem Ipsum is simply dummy text </p>
             </div>
             <div class="about-content">
@@ -164,20 +134,14 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Florida, USA
                     </li>
-                    <li>
-                      <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                    </li>
-                    <li>
-                      <i class="far fa-money-bill-alt"></i> $300 - $1000
-                      <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                    </li>
+                    
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
                       <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                     </div>
                     <div class="col-6">
-                      <a href="booking.html" class="btn book-btn">Book Now</a>
+                      <a href="booking.html" class="btn book-btn">Chat Now</a>
                     </div>
                   </div>
                 </div>
@@ -212,20 +176,14 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Newyork, USA
                     </li>
-                    <li>
-                      <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                    </li>
-                    <li>
-                      <i class="far fa-money-bill-alt"></i> $50 - $300
-                      <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                    </li>
+                  
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
                       <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                     </div>
                     <div class="col-6">
-                      <a href="booking.html" class="btn book-btn">Book Now</a>
+                      <a href="booking.html" class="btn book-btn">Chat Now</a>
                     </div>
                   </div>
                 </div>
@@ -260,20 +218,14 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Georgia, USA
                     </li>
-                    <li>
-                      <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                    </li>
-                    <li>
-                      <i class="far fa-money-bill-alt"></i> $100 - $400
-                      <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                    </li>
+                   
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
                       <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                     </div>
                     <div class="col-6">
-                      <a href="booking.html" class="btn book-btn">Book Now</a>
+                      <a href="booking.html" class="btn book-btn">Chat Now</a>
                     </div>
                   </div>
                 </div>
@@ -308,20 +260,14 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Louisiana, USA
                     </li>
-                    <li>
-                      <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                    </li>
-                    <li>
-                      <i class="far fa-money-bill-alt"></i> $150 - $250
-                      <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                    </li>
+                    
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
                       <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                     </div>
                     <div class="col-6">
-                      <a href="booking.html" class="btn book-btn">Book Now</a>
+                      <a href="booking.html" class="btn book-btn">Chat Now</a>
                     </div>
                   </div>
                 </div>
@@ -356,20 +302,14 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Michigan, USA
                     </li>
-                    <li>
-                      <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                    </li>
-                    <li>
-                      <i class="far fa-money-bill-alt"></i> $50 - $700
-                      <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                    </li>
+                   
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
                       <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                     </div>
                     <div class="col-6">
-                      <a href="booking.html" class="btn book-btn">Book Now</a>
+                      <a href="booking.html" class="btn book-btn">Chat Now</a>
                     </div>
                   </div>
                 </div>
@@ -404,20 +344,14 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Texas, USA
                     </li>
-                    <li>
-                      <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                    </li>
-                    <li>
-                      <i class="far fa-money-bill-alt"></i> $100 - $500
-                      <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                    </li>
+                    
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
                       <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                     </div>
                     <div class="col-6">
-                      <a href="booking.html" class="btn book-btn">Book Now</a>
+                      <a href="booking.html" class="btn book-btn">Chat Now</a>
                     </div>
                   </div>
                 </div>
@@ -452,20 +386,14 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Kansas, USA
                     </li>
-                    <li>
-                      <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                    </li>
-                    <li>
-                      <i class="far fa-money-bill-alt"></i> $100 - $1000
-                      <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                    </li>
+                    
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
                       <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                     </div>
                     <div class="col-6">
-                      <a href="booking.html" class="btn book-btn">Book Now</a>
+                      <a href="booking.html" class="btn book-btn">Chat Now</a>
                     </div>
                   </div>
                 </div>
@@ -500,20 +428,13 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> California, USA
                     </li>
-                    <li>
-                      <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                    </li>
-                    <li>
-                      <i class="far fa-money-bill-alt"></i> $100 - $400
-                      <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                    </li>
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
                       <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                     </div>
                     <div class="col-6">
-                      <a href="booking.html" class="btn book-btn">Book Now</a>
+                      <a href="booking.html" class="btn book-btn">Chat Now</a>
                     </div>
                   </div>
                 </div>
@@ -536,7 +457,7 @@ require_once ROOT_PATH.'includes/nav.php';
           </div>
           <div class="col-md-7">
             <div class="section-header">
-              <h2 class="mt-2">Availabe Features in Our Clinic</h2>
+              <h2 class="mt-2">Foster center near you..</h2>
               <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
             </div>
             <div class="features-slider slider">
