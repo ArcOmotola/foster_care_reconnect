@@ -42,7 +42,7 @@ class Database
      */
     public function __construct()
     {
-        $dsn = 'mysql:host='.$this->host.';dbname='.$this->dbname.';charset=utf8mb4';
+        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname . ';charset=utf8mb4';
         try {
             $this->pdo = new PDO($dsn, $this->username, $this->password, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -51,8 +51,10 @@ class Database
             ]);
 
             $this->createAdminsTable();
+            $this->createFosterHomeTable();
+            $this->createFosterTable();
         } catch (PDOException $e) {
-            exit('Database Connection Failed: '.$e->getMessage());
+            exit('Database Connection Failed: ' . $e->getMessage());
         }
     }
 
@@ -83,7 +85,7 @@ class Database
      */
     private function createFosterHomeTable()
     {
-        $sql = 'CREATE TABLE IF NOT EXISTS foster_home (
+        $sql = 'CREATE TABLE IF NOT EXISTS foster_homes (
             id INT AUTO_INCREMENT PRIMARY KEY,
             foster_name VARCHAR(255) NOT NULL,
             country_id VARCHAR(255) NOT NULL,
@@ -92,7 +94,6 @@ class Database
             contact_number VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
-            description VARCHAR(255) NOT NULL,
             status BOOLEAN DEFAULT TRUE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE CASCADE,
@@ -112,16 +113,16 @@ class Database
         $sql = "CREATE TABLE IF NOT EXISTS customers (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
-                region_id INT NOT NULL,
+                foster_home_id INT NOT NULL,
                 email VARCHAR(255) NOT NULL UNIQUE,
                 password VARCHAR(255) NOT NULL,
                 address VARCHAR(255) NOT NULL,
                 phone_number VARCHAR(255)  NULL,
                 preferred_pickup_day VARCHAR(255) NOT NULL,
                 status BOOLEAN DEFAULT TRUE,
-                role ENUM('customer', 'admin') DEFAULT 'customer',
+                role ENUM('user') DEFAULT 'user',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE CASCADE
+                FOREIGN KEY (foster_home_id) REFERENCES foster_homes(id) ON DELETE CASCADE
             )";
         $this->pdo->exec($sql);
     }
