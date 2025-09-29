@@ -53,6 +53,7 @@ class Database
             $this->createAdminsTable();
             $this->createFosterHomeTable();
             $this->createFosterTable();
+            $this->createFosterPlacementTable();
         } catch (PDOException $e) {
             exit('Database Connection Failed: ' . $e->getMessage());
         }
@@ -77,7 +78,7 @@ class Database
         $this->pdo->exec($sql);
     }
 
-    // Create users table if it doesn't exist
+    // Create foster home table if it doesn't exist
     /**
      * createBinCategoryTable.
      *
@@ -92,6 +93,7 @@ class Database
             state_id VARCHAR(255) NOT NULL,
             address VARCHAR(255) NOT NULL,
             contact_number VARCHAR(255) NOT NULL,
+            cover_image VARCHAR(255) NULL,
             email VARCHAR(255) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
             status BOOLEAN DEFAULT TRUE,
@@ -102,7 +104,7 @@ class Database
         $this->pdo->exec($sql);
     }
 
-    // Create Customer table if it doesn't exist
+    // Create Foster table if it doesn't exist
     /**
      * createCustomerTable.
      *
@@ -110,7 +112,7 @@ class Database
      */
     private function createFosterTable()
     {
-        $sql = "CREATE TABLE IF NOT EXISTS customers (
+        $sql = "CREATE TABLE IF NOT EXISTS fosters (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 foster_home_id INT NOT NULL,
@@ -118,11 +120,36 @@ class Database
                 password VARCHAR(255) NOT NULL,
                 address VARCHAR(255) NOT NULL,
                 phone_number VARCHAR(255)  NULL,
-                preferred_pickup_day VARCHAR(255) NOT NULL,
+                profile_image VARCHAR(255) NULL,
                 status BOOLEAN DEFAULT TRUE,
                 role ENUM('user') DEFAULT 'user',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (foster_home_id) REFERENCES foster_homes(id) ON DELETE CASCADE
+            )";
+        $this->pdo->exec($sql);
+    }
+
+    // Create Foster Placement table if it doesn't exist
+    /**
+     * createCustomerTable.
+     *
+     * @return void
+     */
+    private function createFosterPlacementTable()
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS foster_placements (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                foster_id INT NOT NULL,
+                placement_name VARCHAR(255)  NULL,
+                placement_reason VARCHAR(255)  NULL,
+                last_pickup_date VARCHAR(255) NULL,
+                last_pickup_name VARCHAR(255) NULL,
+                last_pickup_addresss VARCHAR(255) NULL,
+                final_placement_outcome VARCHAR(255) NULL,
+                status BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (foster_id) REFERENCES fosters(id) ON DELETE CASCADE
             )";
         $this->pdo->exec($sql);
     }
