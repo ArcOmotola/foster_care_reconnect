@@ -28,7 +28,7 @@
                 <li class="has-submenu">
                     <a href="/foster">Fosters</a>
                 </li>
-                
+
                 <li>
                     <a href="contact.php" target="_blank">Contact</a>
                 </li>
@@ -47,9 +47,20 @@
                     <p class="contact-info-header"> +1 315 369 5943</p>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link header-login" href="login.php">login / Signup </a>
-            </li>
+            <?php
+            $auth_login = $_SESSION['last_login_time'] ?? false;
+            if ($auth_login) { ?>
+                <li class="nav-item">
+                    <a class="nav-link header-login" href="#">Profile </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link header-login" href="logout.php">Logout </a>
+                </li>
+            <?php } else { ?>
+                <li class="nav-item">
+                    <a class="nav-link header-login" href="login.php">login / Signup </a>
+                </li>
+            <?php } ?>
         </ul>
     </nav>
 </header>

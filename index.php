@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'includes/config/path.php';
 require_once ROOT_PATH . 'includes/header.php';
 require_once ROOT_PATH . 'includes/function.php';
@@ -107,40 +108,14 @@ $data = [
     require_once ROOT_PATH . 'includes/nav.php';
     ?>
     <!-- Home Banner -->
-    <section class="section section-search">
-      <div class="container-fluid">
-        <div class="banner-wrapper">
-          <div class="banner-header text-center">
-            <h1>Search Foster, Connect with friends</h1>
-            <p>Discover the old friends of the city nearest to you.</p>
-          </div>
 
-          <!-- Search -->
-          <div class="search-box">
-            <form action="templateshub.net">
-              <div class="form-group search-location">
-                <input type="text" class="form-control" placeholder="Search Location">
-                <span class="form-text">Based on your Location</span>
-              </div>
-              <div class="form-group search-info">
-                <input type="text" class="form-control" placeholder="Search friend">
-                <span class="form-text">Ex : Year of admission, name, city</span>
-              </div>
-              <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
-            </form>
-          </div>
-          <!-- /Search -->
-
-        </div>
-      </div>
-    </section>
     <!-- /Home Banner -->
 
     <!-- Clinic and Specialities -->
     <section class="section section-specialities">
       <div class="container-fluid">
         <div class="section-header text-center">
-          <h2>City we cover</h2>
+          <h2>State we cover</h2>
           <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
         <div class="row justify-content-center">
