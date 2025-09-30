@@ -54,6 +54,8 @@ class Database
             $this->createFosterHomeTable();
             $this->createFosterTable();
             $this->createFosterPlacementTable();
+            $this->createFosterExperienceTable();
+            $this->createFosterConnectionTable();
         } catch (PDOException $e) {
             exit('Database Connection Failed: ' . $e->getMessage());
         }
@@ -89,9 +91,9 @@ class Database
         $sql = 'CREATE TABLE IF NOT EXISTS foster_homes (
             id INT AUTO_INCREMENT PRIMARY KEY,
             foster_name VARCHAR(255) NOT NULL,
-            country_id VARCHAR(255) NOT NULL,
-            state_id VARCHAR(255) NOT NULL,
-            address VARCHAR(255) NOT NULL,
+            country_id INT NOT NULL,
+            state_id INT NOT NULL,
+            home_address VARCHAR(255) NOT NULL,
             contact_number VARCHAR(255) NOT NULL,
             cover_image VARCHAR(255) NULL,
             email VARCHAR(255) NOT NULL UNIQUE,
@@ -99,7 +101,7 @@ class Database
             status BOOLEAN DEFAULT TRUE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE CASCADE,
-            FOREIGN KEY (state_id) REFERENCES states(id) ON DELETE CASCADE,
+            FOREIGN KEY (state_id) REFERENCES states(id) ON DELETE CASCADE
         )';
         $this->pdo->exec($sql);
     }
@@ -119,6 +121,7 @@ class Database
                 email VARCHAR(255) NOT NULL UNIQUE,
                 password VARCHAR(255) NOT NULL,
                 address VARCHAR(255) NOT NULL,
+                ssn VARCHAR(255) NOT NULL,
                 phone_number VARCHAR(255)  NULL,
                 profile_image VARCHAR(255) NULL,
                 status BOOLEAN DEFAULT TRUE,
@@ -147,6 +150,46 @@ class Database
                 last_pickup_name VARCHAR(255) NULL,
                 last_pickup_addresss VARCHAR(255) NULL,
                 final_placement_outcome VARCHAR(255) NULL,
+                status BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (foster_id) REFERENCES fosters(id) ON DELETE CASCADE
+            )";
+        $this->pdo->exec($sql);
+    }
+
+    /*************  ✨ Windsurf Command 🌟  *************/
+    /**
+     * Create foster experience table if it doesn't exist
+     *
+     * @return void
+     */
+    private function createFosterExperienceTable()
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS foster_experiences (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                foster_id INT NOT NULL,
+                school_name VARCHAR(255) NOT NULL,
+                events_attended VARCHAR(255) NULL,
+                favourite_activities VARCHAR(255) NULL,
+                pets VARCHAR(255) NULL,
+                holidays VARCHAR(255) NULL,
+                status BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (foster_id) REFERENCES fosters(id) ON DELETE CASCADE
+            )";
+        $this->pdo->exec($sql);
+    }
+
+    private function createFosterConnectionTable()
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS foster_experiences (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                foster_id INT NOT NULL,
+                friend_name VARCHAR(255) NOT NULL,
+                relation VARCHAR(255) NULL,
+                favourite_teacher VARCHAR(255) NULL,
+                pets VARCHAR(255) NULL,
+                tagline VARCHAR(300000) NULL,
                 status BOOLEAN DEFAULT TRUE,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (foster_id) REFERENCES fosters(id) ON DELETE CASCADE
