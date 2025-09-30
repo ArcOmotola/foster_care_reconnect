@@ -4,12 +4,12 @@ require_once('../includes/config/path.php');
 require_once(ROOT_PATH . 'includes/function.php');
 $db = new Database();
 
-if ($_POST['submit']) {
+if (isset($_POST['submit'])) {
 
     $email =  trim(filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS));
     $password =  trim(htmlspecialchars($_POST['password'], ENT_QUOTES, "UTF-8"));
 
-    if ($email == "" || $password == "" || $role == "") {
+    if ($email == "" || $password == "") {
         $error_message = "Required field can not be empty";
     } else {
         $sql = "SELECT id,email, password FROM fosters WHERE email = :email";
