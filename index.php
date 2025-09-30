@@ -33,6 +33,15 @@ $foster_homes = "SELECT * FROM foster_homes WHERE country_id = 231 ORDER BY RAND
 $result_foster_homes = $db->fetchAll($foster_homes);
 
 
+//foster mock generate
+$foster = "SELECT * FROM fosters";
+$result_fosters = $db->fetchAll($foster);
+if (empty($result_fosters)) {
+  //Insert dummy data into foster_homes table
+  $insert_sql = "INSERT INTO fosters (name, foster_home_id, email, password, address, ssn, phone_number ) VALUES
+    ('Omotola Jolade', 2, 'demo@test.com', md5('1234567890'), '123 Main St, Los Angeles, CA', '123-45-6789', '555-1234')";
+  $db->execute($insert_sql);
+}
 //morked data for fosters
 $data = [
   [
@@ -131,7 +140,7 @@ $data = [
     <section class="section section-specialities">
       <div class="container-fluid">
         <div class="section-header text-center">
-          <h2>City we covers</h2>
+          <h2>City we cover</h2>
           <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
         <div class="row justify-content-center">
@@ -172,7 +181,7 @@ $data = [
         <div class="row">
           <div class="col-lg-4">
             <div class="section-header ">
-              <h2>Foster you may know</h2>
+              <h2>Fosters you may know</h2>
               <p>Lorem Ipsum is simply dummy text </p>
             </div>
             <div class="about-content">
@@ -242,7 +251,7 @@ $data = [
           </div>
           <div class="col-md-7">
             <div class="section-header">
-              <h2 class="mt-2">Foster center near you..</h2>
+              <h2 class="mt-2">Foster centers near you..</h2>
               <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
             </div>
             <div class="features-slider slider">

@@ -3,6 +3,11 @@ require_once 'includes/config/path.php';
 require_once ROOT_PATH . 'includes/header.php';
 require_once ROOT_PATH . 'includes/function.php';
 $db = new Database();
+
+if (isset($_GET['error'])) {
+	$error_message = $_GET['error'];
+}
+
 ?>
 
 <body>
@@ -32,22 +37,33 @@ $db = new Database();
 								</div> -->
 								<div class="col-md-12 col-lg-6 login-right">
 									<div class="login-header">
-										<h3>Login </h3>
+										<?php
+										if (isset($error_message)) { ?>
+											<div class="alert alert-fill-danger" role="alert">
+												<i class="fa fa-exclamation-triangle"></i>
+												<?= $error_message ?>
+											</div>
+										<?php } else { ?>
+
+											<h4>Login to your account !</h4>
+
+										<?php } ?>
+
 									</div>
-									<form action="#" method="post">
+
+									<form method="post" action="backend/login.php">
 										<div class="form-group form-focus">
-											<input type="email" name="email" class="form-control floating" placeholder="Enter your email">
+											<input type="email" name="email" required class="form-control floating" placeholder="Enter your email">
 											<label class="focus-label">Email</label>
 										</div>
 										<div class="form-group form-focus">
-											<input type="password" class="form-control floating">
+											<input type="password" class="form-control floating" required name="password" placeholder="Enter your password">
 											<label class="focus-label">Password</label>
 										</div>
 										<div class="text-right">
 											<a class="forgot-link" href="#">Forgot Password ?</a>
 										</div>
-										<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Login</button>
-
+										<button name="submit" type="submit" class="btn btn-primary btn-block btn-lg login-btn">Login</button>
 										<div class="text-center dont-have">Don’t have an account? <a href="register.php">Register</a></div>
 									</form>
 								</div>
