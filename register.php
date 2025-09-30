@@ -6,6 +6,9 @@ $db = new Database();
 
 $countries = 'SELECT name, id FROM countries';
 $result_countries = $db->fetchAll($countries);
+
+$foster_home_sql = "SELECT * FROM foster_homes";
+$result_foster_home = $db->fetchAll($foster_home_sql);
 ?>
 
 <body>
@@ -39,25 +42,25 @@ $result_countries = $db->fetchAll($countries);
 											<div class="col-md-6 col-sm-12">
 												<div class="form-group card-label">
 													<label>Full Name</label>
-													<input class="form-control" type="text">
+													<input class="form-control" type="text" name="full_name" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-12">
 												<div class="form-group card-label">
 													<label>SSN</label>
-													<input class="form-control" type="text" placeholder="Last 4 digit for verificatioon">
+													<input class="form-control" type="text" required name="ssn" placeholder="Last 4 digit for verificatioon">
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-12">
 												<div class="form-group card-label">
 													<label>Email</label>
-													<input class="form-control" type="email">
+													<input class="form-control" type="email" name="email" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-12">
 												<div class="form-group card-label">
 													<label>Phone</label>
-													<input class="form-control" type="text">
+													<input class="form-control" type="text" name="phone" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-12">
@@ -84,13 +87,13 @@ $result_countries = $db->fetchAll($countries);
 											<div class="col-md-6 col-sm-12">
 												<div class="form-group card-label">
 													<label>Date of birth</label>
-													<input class="form-control" type="date">
+													<input class="form-control" type="date" name="dob" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-12">
 												<div class="form-group card-label">
-													<label>Place of birth</label>
-													<input class="form-control" type="text">
+													<label>Password</label>
+													<input class="form-control" type="password" name="password" required>
 												</div>
 											</div>
 										</div>
@@ -105,36 +108,44 @@ $result_countries = $db->fetchAll($countries);
 										<div class="payment-list">
 
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="card_name">Name on Card</label>
-														<input class="form-control" id="card_name" type="text">
+														<label>Foster home</label>
+														<select name="country_id" class="form-control form-control-lg" id="country" required>
+															<option value="" disabled selected>Select Country</option>
+															<?php
+															foreach ($result_foster_home as $home) { ?>
+																<option value="<?php echo $home['id']; ?>"><?php echo $home['foster_name']; ?></option>
+															<?php }
+															?>
+														</select>
 													</div>
 												</div>
-												<div class="col-md-6">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="card_number">Card Number</label>
-														<input class="form-control" id="card_number" placeholder="1234  5678  9876  5432" type="text">
+														<label>Date Admitted</label>
+														<input class="form-control" type="date" name="date_of_admission" required>
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="expiry_month">Expiry Month</label>
-														<input class="form-control" id="expiry_month" placeholder="MM" type="text">
+														<label>Date of leaving</label>
+														<input class="form-control" type="date" name="date_of_leaving" required>
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="expiry_year">Expiry Year</label>
-														<input class="form-control" id="expiry_year" placeholder="YY" type="text">
+														<label>Foster parent name</label>
+														<input class="form-control" type="text" name="foster_parent_name" required>
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="cvv">CVV</label>
-														<input class="form-control" id="cvv" type="text">
+														<label>Case worker name</label>
+														<input class="form-control" type="text" name="case_worker_name" required>
 													</div>
 												</div>
+
 											</div>
 										</div>
 										<!-- /Credit Card Payment -->
@@ -146,34 +157,61 @@ $result_countries = $db->fetchAll($countries);
 										<div class="payment-list">
 
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="card_name">Name on Card</label>
-														<input class="form-control" id="card_name" type="text">
+														<label>Full Name</label>
+														<input class="form-control" type="text">
 													</div>
 												</div>
-												<div class="col-md-6">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="card_number">Card Number</label>
-														<input class="form-control" id="card_number" placeholder="1234  5678  9876  5432" type="text">
+														<label>SSN</label>
+														<input class="form-control" type="text" placeholder="Last 4 digit for verificatioon">
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="expiry_month">Expiry Month</label>
-														<input class="form-control" id="expiry_month" placeholder="MM" type="text">
+														<label>Email</label>
+														<input class="form-control" type="email">
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="expiry_year">Expiry Year</label>
-														<input class="form-control" id="expiry_year" placeholder="YY" type="text">
+														<label>Phone</label>
+														<input class="form-control" type="text">
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label for="cvv">CVV</label>
-														<input class="form-control" id="cvv" type="text">
+														<label>Country</label>
+														<select name="country_id" class="form-control form-control-lg" id="country" required>
+															<option value="" disabled selected>Select Country</option>
+															<?php
+															foreach ($result_countries as $country) { ?>
+																<option value="<?php echo $country['id']; ?>"><?php echo $country['name']; ?></option>
+															<?php }
+															?>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="form-group card-label">
+														<label>State</label>
+														<select name="state" class="form-control form-control-lg" id="state" required>
+															<option value="" selected>Select State</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="form-group card-label">
+														<label>Date of birth</label>
+														<input class="form-control" type="date">
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="form-group card-label">
+														<label>Place of birth</label>
+														<input class="form-control" type="text">
 													</div>
 												</div>
 											</div>
