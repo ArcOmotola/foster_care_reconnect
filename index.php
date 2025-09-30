@@ -1,8 +1,27 @@
 <?php
 require_once 'includes/config/path.php';
-require_once ROOT_PATH.'includes/header.php';
-require_once ROOT_PATH.'includes/function.php';
+require_once ROOT_PATH . 'includes/header.php';
+require_once ROOT_PATH . 'includes/function.php';
 $db = new Database();
+
+//Check if foster home has data in the using country_id for USA which is 231
+$foster_home_sql = "SELECT * FROM foster_homes";
+$result_foster_home = $db->fetchAll($foster_home_sql);
+if (empty($result_foster_home)) {
+  //Insert dummy data into foster_homes table
+  $insert_sql = "INSERT INTO foster_homes (foster_name, country_id, state_id, home_address, contact_number, cover_image, email, password) VALUES
+    ('Happy Tails Foster Home', 231, 1, '123 Main St, Los Angeles, CA', '555-1234', 'cover1.jpg', 'dH1oX@example.com', md5('password10')),
+    ('Safe Haven Foster Care', 231, 2, '456 Oak St, New York, NY', '555-5678', 'cover2.jpg', 'oV9mD@example.com', md5('password10')),
+    ('Forever Friends Foster Home', 231, 3, '789 Pine St, Chicago, IL', '555-8765', 'cover3.jpg', 'a6TlO@example.com', md5('password10')),
+    ('Loving Arms Foster Care', 231, 4, '321 Maple St, Houston, TX', '555-4321', 'cover4.jpg', 'qH1oX@example.com', md5('password10')),
+    ('New Beginnings Foster Home', 231, 1, '654 Cedar St, Phoenix, AZ', '555-6789', 'cover5.jpg', 'lH1oX@example.com', md5('password10')),
+    ('Bright Futures Foster Care', 231, 2, '987 Birch St, Philadelphia, PA', '555-9876', 'cover6.jpg', 'kH1oX@example.com', md5('password10')),
+    ('Caring Hearts Foster Home', 231, 3, '147 Spruce St, San Antonio, TX', '555-2468', 'cover7.jpg', 'rH1oX@example.com', md5('password10')),
+    ('Hopeful Hearts Foster Care', 231, 4, '258 Walnut St, Dallas, TX', '555-1357', 'cover8.jpg', 'wH1oX@example.com', md5('password10')),
+    ('Second Chance Foster Home', 231, 1, '369 Chestnut St, San Diego, CA', '555-8642', 'cover9.jpg', 'xH1oX@example.com', md5('password10')),
+    ('Healthy Hearts Foster Care', 231, 2, '789 Birch St, Austin, TX', '555-7531', 'cover10.jpg', 'yH1oX@example.com', md5('password10'));";
+  $db->execute($insert_sql);
+}
 $state_sql = "SELECT name FROM states WHERE country_id = 231 ORDER BY RAND() LIMIT 4";
 $result = $db->fetchAll($state_sql);
 ?>
@@ -13,12 +32,12 @@ $result = $db->fetchAll($state_sql);
   <div class="main-wrapper">
     <!-- Header -->
     <?php
-    require_once ROOT_PATH.'includes/header.php';
-?>
+    require_once ROOT_PATH . 'includes/header.php';
+    ?>
     <!-- /Header -->
-<?php
-require_once ROOT_PATH.'includes/nav.php';
-?>
+    <?php
+    require_once ROOT_PATH . 'includes/nav.php';
+    ?>
     <!-- Home Banner -->
     <section class="section section-search">
       <div class="container-fluid">
@@ -62,22 +81,22 @@ require_once ROOT_PATH.'includes/nav.php';
             <div class="specialities-slider slider">
 
               <!-- Slider Item -->
-               <?php
-               if (empty($result)) { ?>
+              <?php
+              if (empty($result)) { ?>
                 <h1>No Data available</h1>
-               <?php }
-                foreach ($result as $state) { ?>
-                  <div class="speicality-item text-center">
-                    <div class="speicality-img">
-                      <img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">
-                      <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                    </div>
-                    <p><?= $state['name']?></p>
+              <?php }
+              foreach ($result as $state) { ?>
+                <div class="speicality-item text-center">
+                  <div class="speicality-img">
+                    <img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">
+                    <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                   </div>
-                <?php } ?>
+                  <p><?= $state['name'] ?></p>
+                </div>
+              <?php } ?>
               <!-- /Slider Item -->
 
-              
+
 
             </div>
             <!-- /Slider -->
@@ -134,7 +153,7 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Florida, USA
                     </li>
-                    
+
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
@@ -176,7 +195,7 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Newyork, USA
                     </li>
-                  
+
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
@@ -218,7 +237,7 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Georgia, USA
                     </li>
-                   
+
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
@@ -260,7 +279,7 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Louisiana, USA
                     </li>
-                    
+
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
@@ -302,7 +321,7 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Michigan, USA
                     </li>
-                   
+
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
@@ -344,7 +363,7 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Texas, USA
                     </li>
-                    
+
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
@@ -386,7 +405,7 @@ require_once ROOT_PATH.'includes/nav.php';
                     <li>
                       <i class="fas fa-map-marker-alt"></i> Kansas, USA
                     </li>
-                    
+
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
@@ -511,16 +530,16 @@ require_once ROOT_PATH.'includes/nav.php';
 
     <!-- Footer -->
     <?php
-require_once ROOT_PATH.'includes/footer.php';
-?>
+    require_once ROOT_PATH . 'includes/footer.php';
+    ?>
     <!-- /Footer -->
 
   </div>
   <!-- /Main Wrapper -->
 
   <?php
-  require_once ROOT_PATH.'includes/script.php';
-?>
+  require_once ROOT_PATH . 'includes/script.php';
+  ?>
 
 </body>
 
