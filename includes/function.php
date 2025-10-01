@@ -127,6 +127,8 @@ class Database
                 dob VARCHAR(255) NULL,
                 status BOOLEAN DEFAULT TRUE,
                 role ENUM('user') DEFAULT 'user',
+                is_verified BOOLEAN DEFAULT FALSE,
+                verification_token VARCHAR(255) NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (foster_home_id) REFERENCES foster_homes(id) ON DELETE CASCADE
             )";
