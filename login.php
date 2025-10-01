@@ -7,7 +7,9 @@ $db = new Database();
 if (isset($_GET['error'])) {
 	$error_message = $_GET['error'];
 }
-
+if (isset($_GET['success'])) {
+	$success_message = $_GET['success'];
+}
 ?>
 
 <body>
@@ -42,6 +44,11 @@ if (isset($_GET['error'])) {
 											<div class="alert alert-fill-danger" role="alert">
 												<i class="fa fa-exclamation-triangle"></i>
 												<?= $error_message ?>
+											</div>
+										<?php } elseif (isset($success_message)) { ?>
+											<div class="alert alert-fill-success" role="alert">
+												<i class="fa fa-success"></i>
+												<?= $success_message ?>
 											</div>
 										<?php } else { ?>
 

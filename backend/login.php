@@ -15,9 +15,15 @@ if (isset($_POST['submit'])) {
         $sql = "SELECT id,email, password FROM fosters WHERE email = :email";
         $query = $db->fetch($sql, ['email' => $email]);
         if (empty($query)) {
-            $error_message = "Invalid credentials,Kindly check.";
+            $error_message = "foster not exists,Kindly check.";
             header("Location: ../login.php?error=" . $error_message);
         } else {
+            //checking if password is correct
+            if ($query['password'] != md5($password)) {
+                $error_message = "Invalid credentials,Kindly check.";
+                header("Location: ../login.php?error=" . $error_message);
+                exit;
+            }
             if (!isset($_SESSION['last_login_time'])) {
                 $_SESSION['id'] = $query['id'];
                 $_SESSION['name'] = $query['name'];

@@ -33,7 +33,7 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 							<div class="card-body">
 
 								<!-- Checkout Form -->
-								<form action="https://dreamguys.co.in/demo/doccure/booking-success.html">
+								<form action="backend/register.php" method="POST">
 
 									<!-- Personal Information -->
 									<div class="info-widget">
@@ -63,25 +63,11 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 													<input class="form-control" type="text" name="phone" required>
 												</div>
 											</div>
+
 											<div class="col-md-6 col-sm-12">
 												<div class="form-group card-label">
-													<label>Country</label>
-													<select name="country_id" class="form-control form-control-lg" id="country" required>
-														<option value="" disabled selected>Select Country</option>
-														<?php
-														foreach ($result_countries as $country) { ?>
-															<option value="<?php echo $country['id']; ?>"><?php echo $country['name']; ?></option>
-														<?php }
-														?>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-12">
-												<div class="form-group card-label">
-													<label>State</label>
-													<select name="state" class="form-control form-control-lg" id="state" required>
-														<option value="" selected>Select State</option>
-													</select>
+													<label>Home address</label>
+													<input class="form-control" type="text" name="adress" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-12">
@@ -111,8 +97,8 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
 														<label>Foster home</label>
-														<select name="country_id" class="form-control form-control-lg" id="country" required>
-															<option value="" disabled selected>Select Country</option>
+														<select name="foster_home_id" class="form-control form-control-lg" id="country" required>
+															<option value="" disabled selected>Select Home care</option>
 															<?php
 															foreach ($result_foster_home as $home) { ?>
 																<option value="<?php echo $home['id']; ?>"><?php echo $home['foster_name']; ?></option>
@@ -154,12 +140,12 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 										<h4 class="card-title">Placement History</h4>
 
 										<!-- Credit Card Payment -->
-										<div class="payment-list">
+										<!-- <div class="payment-list">
 
 											<div class="row">
 												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
-														<label>Full Name</label>
+														<label>Who place</label>
 														<input class="form-control" type="text">
 													</div>
 												</div>
@@ -215,7 +201,7 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> -->
 										<!-- /Paypal Payment -->
 
 										<!-- Terms Accept -->
@@ -229,7 +215,7 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 
 										<!-- Submit Section -->
 										<div class="submit-section mt-4">
-											<button type="submit" class="btn btn-primary submit-btn">Register</button>
+											<button type="submit" name="register" class="btn btn-primary submit-btn">Register</button>
 										</div>
 										<!-- /Submit Section -->
 
