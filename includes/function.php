@@ -64,7 +64,7 @@ class Database
     // Create admins table if it doesn't exist
 
     /**
-     * createRegionTable.
+     * createAdminsTable.
      *
      * @return void
      */
@@ -124,6 +124,7 @@ class Database
                 ssn VARCHAR(255) NOT NULL,
                 phone_number VARCHAR(255)  NULL,
                 profile_image VARCHAR(255) NULL,
+                dob VARCHAR(255) NULL,
                 status BOOLEAN DEFAULT TRUE,
                 role ENUM('user') DEFAULT 'user',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
