@@ -21,11 +21,11 @@ function generalEmailSender($subject, $email, $body, $recipient_name)
         $mail->SMTPDebug = 0;                                       // Enable verbose debug output
         $mail->isSMTP();                                            // Set mailer to use SMTP
 
-        $mail->Host       = "";  // Specify main and backup SMTP servers
+        $mail->Host       = "host detail";  // Specify main and backup SMTP servers
 
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
 
-        $mail->Username   = "";                     // SMTP username
+        $mail->Username   = "username here";                     // SMTP username
 
         $mail->Password   = "";                               // SMTP password
 
@@ -37,7 +37,7 @@ function generalEmailSender($subject, $email, $body, $recipient_name)
 
         //Recipients
 
-        $mail->setFrom('info@fleggi.com', 'Foster care reconnnect');
+        $mail->setFrom('from detail here', 'Foster care reconnnect');
 
         $mail->addAddress($email, $recipient_name);     // Add a recipient
 
