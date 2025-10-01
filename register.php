@@ -67,7 +67,7 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 											<div class="col-md-6 col-sm-12">
 												<div class="form-group card-label">
 													<label>Home address</label>
-													<input class="form-control" type="text" name="adress" required>
+													<input class="form-control" type="text" name="address" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-12">

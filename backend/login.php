@@ -24,6 +24,12 @@ if (isset($_POST['submit'])) {
                 header("Location: ../login.php?error=" . $error_message);
                 exit;
             }
+            //check if account is verified
+            if ($query['is_verified'] != 1) {
+                $error_message = "kindly verify your account, check your email for verification process, thanks.";
+                header("Location: ../login.php?error=" . $error_message);
+                exit;
+            }
             if (!isset($_SESSION['last_login_time'])) {
                 $_SESSION['id'] = $query['id'];
                 $_SESSION['name'] = $query['name'];
