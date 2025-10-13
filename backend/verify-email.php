@@ -9,7 +9,7 @@ if (isset($_GET['token'])) {
     $sql = "SELECT verification_token, email, is_verified FROM fosters WHERE verification_token = :verification_token";
     $query = $db->fetch($sql, ['verification_token' => $token]);
     if (!empty($query)) {
-        //check is_verified to 1
+        //check is_verified to 11
         if ($query['is_verified'] == 1) {
             $error_message = "Email already verified. Please login.";
             header("Location: ../login.php?error=" . $error_message);
