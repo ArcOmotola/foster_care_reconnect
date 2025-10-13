@@ -41,14 +41,21 @@ if (isset($_GET['success'])) {
 									<div class="login-header">
 										<?php
 										if (isset($error_message)) { ?>
-											<div class="alert alert-fill-danger" role="alert">
-												<i class="fa fa-exclamation-triangle"></i>
-												<?= $error_message ?>
+
+											<div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+												<strong>Error!</strong> <?= $error_message ?>
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
 											</div>
 										<?php } elseif (isset($success_message)) { ?>
-											<div class="alert alert-fill-success" role="alert">
-												<i class="fa fa-success"></i>
-												<?= $success_message ?>
+											<div class="alert alert-success alert-dismissible fade show" role="alert">
+
+												<strong>Success!</strong><?= $success_message ?>
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
 											</div>
 										<?php } else { ?>
 
@@ -68,7 +75,7 @@ if (isset($_GET['success'])) {
 											<label class="focus-label">Password</label>
 										</div>
 										<div class="text-right">
-											<a class="forgot-link" href="#">Forgot Password ?</a>
+											<a class="forgot-link" href="forget-password.php">Forgot Password ?</a>
 										</div>
 										<button name="submit" type="submit" class="btn btn-primary btn-block btn-lg login-btn">Login</button>
 										<div class="text-center dont-have">Don’t have an account? <a href="register.php">Register</a></div>

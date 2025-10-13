@@ -43,6 +43,9 @@ if (empty($result_fosters)) {
     ('Omotola Jolade', 2, 'demo@test.com', md5('1234567890'), '123 Main St, Los Angeles, CA', '123-45-6789', '555-1234')";
   $db->execute($insert_sql);
 }
+
+$random_fosters = "SELECT * FROM fosters ORDER BY RAND() LIMIT 6";
+$result_fosters = $db->fetchAll($random_fosters);
 //morked data for fosters
 $data = [
   [
@@ -107,47 +110,77 @@ $data = [
     <?php
     require_once ROOT_PATH . 'includes/nav.php';
     ?>
-    <!-- Home Banner -->
 
-    <!-- /Home Banner -->
-
-    <!-- Clinic and Specialities -->
-    <section class="section section-specialities">
-      <div class="container-fluid">
-        <div class="section-header text-center">
-          <h2>State we cover</h2>
-          <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-md-9">
-            <!-- Slider -->
-            <div class="specialities-slider slider">
-
-              <!-- Slider Item -->
-              <?php
-              if (empty($result)) { ?>
-                <h1>No Data available</h1>
-              <?php }
-              foreach ($result as $state) { ?>
-                <div class="speicality-item text-center">
-                  <div class="speicality-img">
-                    <img src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">
-                    <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                  </div>
-                  <p><?= $state['name'] ?></p>
-                </div>
-              <?php } ?>
-              <!-- /Slider Item -->
-
-
-
+    <?php if (isset($_SESSION['last_login_time'])) { ?>
+      <!-- Home Banner -->
+      <section class="section section-search">
+        <div class="container-fluid">
+          <div class="banner-wrapper">
+            <div class="banner-header text-center">
+              <h1>Search Foster, Connect with friends</h1>
+              <!-- <p>Discover the best doctors, clinic & hospital the city nearest to you.</p> -->
             </div>
-            <!-- /Slider -->
 
+            <!-- Search -->
+            <div class="search-box">
+              <form action="templateshub.net">
+                <div class="form-group search-location">
+                  <input type="text" class="form-control" placeholder="Search Location">
+                  <span class="form-text">Based on your Location</span>
+                </div>
+                <div class="form-group search-info">
+                  <input type="text" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                  <span class="form-text">Ex : City, State or Name for Check up etc</span>
+                </div>
+                <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
+              </form>
+            </div>
+            <!-- /Search -->
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <!-- /Home Banner -->
+    <?php } else { ?>
+      <!-- Clinic and Specialities -->
+      <section class="section section-specialities">
+        <div class="container-fluid">
+          <div class="section-header text-center">
+            <h2>Find your long lost loved ones</h2>
+            <p class="sub-title">Reconnect Coverage.</p>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-9">
+              <!-- Slider -->
+              <div class="specialities-slider slider">
+
+                <!-- Slider Item -->
+                <?php
+                if (empty($result)) { ?>
+                  <h1>No Data available</h1>
+                <?php }
+                foreach ($result as $state) { ?>
+                  <div class="speicality-item text-center">
+                    <div class="speicality-img">
+                      <img src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">
+                      <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                    </div>
+                    <p><?= $state['name'] ?></p>
+                  </div>
+                <?php } ?>
+                <!-- /Slider Item -->
+
+
+
+              </div>
+              <!-- /Slider -->
+
+            </div>
+          </div>
+        </div>
+      </section>
+    <?php } ?>
+
+
     <!-- Clinic and Specialities -->
 
     <!-- Popular Section -->
@@ -156,13 +189,13 @@ $data = [
         <div class="row">
           <div class="col-lg-4">
             <div class="section-header ">
-              <h2>Fosters you may know</h2>
-              <p>Lorem Ipsum is simply dummy text </p>
+              <h2>People you may know</h2>
+              <p>When loved ones drift apart, we map a way back. Search, verify, and reconnect with the people who matter most safely and simply.</p>
             </div>
             <div class="about-content">
-              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>
+              <!-- <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>
               <p>web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes</p>
-              <a href="javascript:;">Read More..</a>
+              <a href="javascript:;">Read More..</a> -->
             </div>
           </div>
           <div class="col-lg-8">
@@ -226,7 +259,7 @@ $data = [
           </div>
           <div class="col-md-7">
             <div class="section-header">
-              <h2 class="mt-2">Foster centers near you..</h2>
+              <h2 class="mt-2">Foster Homes near you</h2>
               <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
             </div>
             <div class="features-slider slider">

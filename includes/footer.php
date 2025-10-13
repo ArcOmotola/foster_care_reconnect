@@ -12,7 +12,7 @@
                             <img src="assets/img/logo.png" alt="logo">
                         </div>
                         <div class="footer-about-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>A path to reunite. </p>
                             <div class="social-icon">
                                 <ul>
                                     <li>

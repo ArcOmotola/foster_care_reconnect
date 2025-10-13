@@ -56,6 +56,7 @@ class Database
             $this->createFosterPlacementTable();
             $this->createFosterExperienceTable();
             $this->createFosterConnectionTable();
+            $this->createLoggerTable();
         } catch (PDOException $e) {
             exit('Database Connection Failed: ' . $e->getMessage());
         }
@@ -199,6 +200,25 @@ class Database
             )";
         $this->pdo->exec($sql);
     }
+
+    private function createLoggerTable()
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS loggers (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                foster_id INT NOT NULL,
+                log_type VARCHAR(255) NOT NULL,
+                actions VARCHAR(255) NULL,
+                message VARCHAR(255) NULL,
+                status BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (foster_id) REFERENCES fosters(id) ON DELETE CASCADE
+            )";
+        $this->pdo->exec($sql);
+    }
+
+    //Foster Relationship with Home Table
+
+
 
     // Method to execute SELECT queries
     public function fetchAll($query, $params = [])

@@ -22,7 +22,7 @@
                 </a>
             </div>
             <ul class="main-nav">
-                <li class="active">
+                <!-- <li class="active">
                     <a href="/">Home</a>
                 </li>
                 <li class="has-submenu">
@@ -31,7 +31,7 @@
 
                 <li>
                     <a href="contact.php" target="_blank">Contact</a>
-                </li>
+                </li> -->
                 <li class="login-link">
                     <a href="login.php">Login / Signup</a>
                 </li>
@@ -40,18 +40,18 @@
         <ul class="nav header-navbar-rht">
             <li class="nav-item contact-item">
                 <div class="header-contact-img">
-                    <i class="far fa-hospital"></i>
+                    <!-- <i class="far fa-hospital"></i> -->
                 </div>
                 <div class="header-contact-detail">
-                    <p class="contact-header">Contact</p>
-                    <p class="contact-info-header"> +1 315 369 5943</p>
+                    <!-- <p class="contact-header">Contact</p>
+                    <p class="contact-info-header"> +1 315 369 5943</p> -->
                 </div>
             </li>
             <?php
             $auth_login = $_SESSION['last_login_time'] ?? false;
             if ($auth_login) { ?>
                 <li class="nav-item">
-                    <a class="nav-link header-login" href="#">Profile </a>
+                    <a class="nav-link header-login" href="profile.php">Profile </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link header-login" href="logout.php">Logout </a>

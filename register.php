@@ -9,6 +9,13 @@ $result_countries = $db->fetchAll($countries);
 
 $foster_home_sql = "SELECT * FROM foster_homes";
 $result_foster_home = $db->fetchAll($foster_home_sql);
+
+if (isset($_GET['error'])) {
+	$error_message = $_GET['error'];
+}
+if (isset($_GET['success'])) {
+	$success_message = $_GET['success'];
+}
 ?>
 
 <body>
@@ -35,9 +42,29 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 								<!-- Checkout Form -->
 								<form action="backend/register.php" method="POST">
 
-									<!-- Personal Information -->
-									<div class="info-widget">
+									<?php
+									if (isset($error_message)) { ?>
+
+										<div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+											<strong>Error!</strong> <?= $error_message ?>
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+									<?php } elseif (isset($success_message)) { ?>
+										<div class="alert alert-success alert-dismissible fade show" role="alert">
+
+											<strong>Success!</strong><?= $success_message ?>
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+									<?php } else { ?>
 										<h4 class="card-title">Personal Information</h4>
+									<?php } ?>
+									<!-- Personal Information -->
+									<div class="info-widget" id="step-1">
 										<div class="row">
 											<div class="col-md-6 col-sm-12">
 												<div class="form-group card-label">
@@ -82,143 +109,28 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 													<input class="form-control" type="password" name="password" required>
 												</div>
 											</div>
+
+											<div class="col-md-6 col-sm-12">
+												<div class="form-group card-label">
+													<label>Foster home</label>
+													<select name="foster_home_id" class="form-control form-control-lg" id="country" required>
+														<option value="" disabled selected>Select Home care</option>
+														<?php
+														foreach ($result_foster_home as $home) { ?>
+															<option value="<?php echo $home['id']; ?>"><?php echo $home['foster_name']; ?></option>
+														<?php }
+														?>
+													</select>
+												</div>
+											</div>
 										</div>
 										<!-- <div class="exist-customer">Existing Customer? <a href="#">Click here to login</a></div> -->
 									</div>
 									<!-- /Personal Information -->
 
-									<div class="payment-widget">
-										<h4 class="card-title">Foster Care History</h4>
-
-										<!-- Credit Card Payment -->
-										<div class="payment-list">
-
-											<div class="row">
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Foster home</label>
-														<select name="foster_home_id" class="form-control form-control-lg" id="country" required>
-															<option value="" disabled selected>Select Home care</option>
-															<?php
-															foreach ($result_foster_home as $home) { ?>
-																<option value="<?php echo $home['id']; ?>"><?php echo $home['foster_name']; ?></option>
-															<?php }
-															?>
-														</select>
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Date Admitted</label>
-														<input class="form-control" type="date" name="date_of_admission" required>
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Date of leaving</label>
-														<input class="form-control" type="date" name="date_of_leaving" required>
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Foster parent name</label>
-														<input class="form-control" type="text" name="foster_parent_name" required>
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Case worker name</label>
-														<input class="form-control" type="text" name="case_worker_name" required>
-													</div>
-												</div>
-
-											</div>
-										</div>
-										<!-- /Credit Card Payment -->
-
-										<!-- Paypal Payment -->
-										<h4 class="card-title">Placement History</h4>
-
-										<!-- Credit Card Payment -->
-										<!-- <div class="payment-list">
-
-											<div class="row">
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Who place</label>
-														<input class="form-control" type="text">
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>SSN</label>
-														<input class="form-control" type="text" placeholder="Last 4 digit for verificatioon">
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Email</label>
-														<input class="form-control" type="email">
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Phone</label>
-														<input class="form-control" type="text">
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Country</label>
-														<select name="country_id" class="form-control form-control-lg" id="country" required>
-															<option value="" disabled selected>Select Country</option>
-															<?php
-															foreach ($result_countries as $country) { ?>
-																<option value="<?php echo $country['id']; ?>"><?php echo $country['name']; ?></option>
-															<?php }
-															?>
-														</select>
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>State</label>
-														<select name="state" class="form-control form-control-lg" id="state" required>
-															<option value="" selected>Select State</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Date of birth</label>
-														<input class="form-control" type="date">
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Place of birth</label>
-														<input class="form-control" type="text">
-													</div>
-												</div>
-											</div>
-										</div> -->
-										<!-- /Paypal Payment -->
-
-										<!-- Terms Accept -->
-										<div class="terms-accept">
-											<div class="custom-checkbox">
-												<input type="checkbox" id="terms_accept">
-												<label for="terms_accept">I have read and accept <a href="#">Terms &amp; Conditions</a></label>
-											</div>
-										</div>
-										<!-- /Terms Accept -->
-
-										<!-- Submit Section -->
-										<div class="submit-section mt-4">
-											<button type="submit" name="register" class="btn btn-primary submit-btn">Register</button>
-										</div>
-										<!-- /Submit Section -->
-
+									<input type="hidden" name="step" value=1>
+									<div class=" submit-section mt-4">
+										<button type="submit" name="register" class="btn btn-primary submit-btn" id="nextBtn">Next</button>
 									</div>
 								</form>
 								<!-- /Checkout Form -->
@@ -284,6 +196,7 @@ $result_foster_home = $db->fetchAll($foster_home_sql);
 			})
 		})
 	</script>
+	<!-- <script src="assets/js/register.js"></script> -->
 </body>
 
 </html>
