@@ -73,7 +73,7 @@
                     ";
                         generalEmailSender($subject, $to, $body, $name);
                         $foster_id = $db->lastInsertId();
-                        header("Location: ../register-step2.php?forster_id=" . $foster_id . "&success=" . $success_message . "&step=2");
+                        header("Location: ../register-step-2.php?forster_id=" . $foster_id . "&success=" . $success_message . "&step=2");
                         exit;
                     }
                 }
