@@ -37,7 +37,7 @@ function generalEmailSender($subject, $email, $body, $recipient_name)
 
         //Recipients
 
-        $mail->setFrom('info@fleggi.com', 'Foster care reconnnect');
+        $mail->setFrom('info@fosterreconnect.com', 'Foster care reconnnect');
 
         $mail->addAddress($email, $recipient_name);     // Add a recipient
 
