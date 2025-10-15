@@ -22,34 +22,43 @@
                 </a>
             </div>
             <ul class="main-nav">
-                <!-- <li class="active">
-                    <a href="/">Home</a>
-                </li>
-                <li class="has-submenu">
-                    <a href="/foster">Fosters</a>
-                </li>
 
-                <li>
-                    <a href="contact.php" target="_blank">Contact</a>
-                </li> -->
-                <li class="login-link">
-                    <a href="login.php">Login / Signup</a>
-                </li>
+                <?php if (isset($_SESSION['last_login_time'])) { ?>
+                    <li class="login-link">
+                        <a href="profile.php">Profile</a>
+                    </li>
+                    <li class="login-link">
+                        <a href="logout.php">Logout</a>
+                    </li>
+                <?php } else { ?>
+                    <li class="login-link">
+                        <a href="login.php">Login / Signup</a>
+                    </li>
             </ul>
+        <?php } ?>
         </div>
         <ul class="nav header-navbar-rht">
             <li class="nav-item contact-item">
                 <div class="header-contact-img">
-                    <!-- <i class="far fa-hospital"></i> -->
                 </div>
                 <div class="header-contact-detail">
-                    <!-- <p class="contact-header">Contact</p>
-                    <p class="contact-info-header"> +1 315 369 5943</p> -->
+
                 </div>
             </li>
             <?php
             $auth_login = $_SESSION['last_login_time'] ?? false;
             if ($auth_login) { ?>
+                <li class="nav-item contact-item">
+                    <div class="header-contact-img">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <div class="header-contact-detail">
+                        <p class="contact-header">Welcome Back</p>
+                        <p class="contact-info-header">
+                            <?= $_SESSION['name'] ?? 'User' ?>
+                        </p>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link header-login" href="profile.php">Profile </a>
                 </li>
@@ -58,7 +67,7 @@
                 </li>
             <?php } else { ?>
                 <li class="nav-item">
-                    <a class="nav-link header-login" href="login.php">login / Signup </a>
+                    <a class="nav-link header-login" href="login.php">login/ Signup </a>
                 </li>
             <?php } ?>
         </ul>

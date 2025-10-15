@@ -100,6 +100,7 @@ class Database
             email VARCHAR(255) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
             status BOOLEAN DEFAULT TRUE,
+            contact_number VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE CASCADE,
             FOREIGN KEY (state_id) REFERENCES states(id) ON DELETE CASCADE
@@ -146,7 +147,6 @@ class Database
     {
         $sql = "CREATE TABLE IF NOT EXISTS foster_placements (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(255) NOT NULL,
                 foster_id INT NOT NULL,
                 placement_name VARCHAR(255)  NULL,
                 placement_reason VARCHAR(255)  NULL,
@@ -167,6 +167,9 @@ class Database
      *
      * @return void
      */
+
+    // Foster Experience Table
+
     private function createFosterExperienceTable()
     {
         $sql = "CREATE TABLE IF NOT EXISTS foster_experiences (

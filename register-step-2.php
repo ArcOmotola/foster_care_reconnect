@@ -74,26 +74,26 @@ if (isset($_GET['forster_id'])) {
                                                 <input type="text" name="foster_id" id="" value="<?= $foster_id ?>" hidden>
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
-                                                        <label>Date Admitted</label>
-                                                        <input class="form-control" type="date" name="date_of_admission" required>
+                                                        <label>Placement name</label>
+                                                        <input class="form-control" type="text" name="placement_name" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
-                                                        <label>Date of leaving</label>
-                                                        <input class="form-control" type="date" name="date_of_leaving" required>
+                                                        <label>Placement Reason</label>
+                                                        <input class="form-control" type="text" name="placement_reason" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
-                                                        <label>Foster parent name</label>
-                                                        <input class="form-control" type="text" name="foster_parent_name" required>
+                                                        <label>Placement date</label>
+                                                        <input class="form-control" type="date" name="last_pickup_date" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
-                                                        <label>Case worker name</label>
-                                                        <input class="form-control" type="text" name="case_worker_name" required>
+                                                        <label>Placement Outcome</label>
+                                                        <input class="form-control" type="text" name="final_placement_outcome" required>
                                                     </div>
                                                 </div>
 

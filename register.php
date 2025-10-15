@@ -128,7 +128,7 @@ if (isset($_GET['success'])) {
 									</div>
 									<!-- /Personal Information -->
 
-									<input type="hidden" name="step" value=1>
+									<input type="hidden" name="step" value="1">
 									<div class=" submit-section mt-4">
 										<button type="submit" name="register" class="btn btn-primary submit-btn" id="nextBtn">Next</button>
 									</div>
@@ -159,7 +159,7 @@ if (isset($_GET['success'])) {
 	<?php
 	require_once ROOT_PATH . 'includes/script.php';
 	?>
-	<script>
+	<!-- <script>
 		$(function() {
 			// alert("hello")
 			$('#country').on('change', function() {
@@ -195,7 +195,7 @@ if (isset($_GET['success'])) {
 
 			})
 		})
-	</script>
+	</script> -->
 	<!-- <script src="assets/js/register.js"></script> -->
 </body>
 

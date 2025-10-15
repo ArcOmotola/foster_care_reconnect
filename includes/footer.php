@@ -57,15 +57,13 @@
 
                     <!-- Footer Widget -->
                     <div class="footer-widget footer-menu">
-                        <h2 class="footer-title">For Agent</h2>
+                        <h2 class="footer-title">For Social Worker</h2>
                         <ul>
-                            <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-                            <li><a href="/login.php"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                            <li><a href="/social-worker-login.php"><i class="fas fa-angle-double-right"></i> Login</a></li>
 
                         </ul>
                     </div>
                     <!-- /Footer Widget -->
-
                 </div>
 
                 <div class="col-lg-3 col-md-6">

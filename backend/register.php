@@ -6,10 +6,12 @@
     $db = new Database();
 
     //check for each step
-    if (isset($_POST['step'])) {
 
-        if ($step == 1) {
-            if (isset($_POST['register'])) {
+    if (isset($_POST['register'])) {
+        //sanitize and validate inputs
+        if (isset($_POST['step']) && !empty($_POST['step'])) {
+            $step = $_POST['step'];
+            if ($step == 1) {
                 $name =  trim(filter_input(INPUT_POST, "full_name", FILTER_SANITIZE_SPECIAL_CHARS));
                 $ssn =  trim(filter_input(INPUT_POST, "ssn", FILTER_SANITIZE_SPECIAL_CHARS));
                 $email =  trim(filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS));
@@ -77,45 +79,99 @@
                         exit;
                     }
                 }
+            } elseif ($step == 2) {
+                $placement_name =  trim(filter_input(INPUT_POST, "placement_name", FILTER_SANITIZE_SPECIAL_CHARS));
+                $placement_reason =  trim(filter_input(INPUT_POST, "placement_reason", FILTER_SANITIZE_SPECIAL_CHARS));
+                $last_pickup_date =  trim(filter_input(INPUT_POST, "last_pickup_date", FILTER_SANITIZE_SPECIAL_CHARS));
+                $final_placement_outcome =  trim(filter_input(INPUT_POST, "final_placement_outcome", FILTER_SANITIZE_SPECIAL_CHARS));
+                $foster_id =  trim(filter_input(INPUT_POST, "foster_id", FILTER_SANITIZE_SPECIAL_CHARS));
+
+                //Insert to Placement table
+                $sql_placement = "INSERT INTO foster_placements (
+                foster_id,placement_name,
+                placement_reason,last_pickup_date,
+                last_pickup_addresss,
+                final_placement_outcome
+                ) 
+                VALUES (
+                :foster_id,
+                :placement_name,
+                :placement_reason,
+                :last_pickup_date,
+                :last_pickup_addresss,
+                :final_placement_outcome
+                )";
+                $params_placement = [
+                    'foster_id' => $foster_id,
+                    'placement_name' => $placement_name ?? null,
+                    'placement_reason' => $placement_reason ?? null,
+                    'last_pickup_date' => $last_pickup_date ?? null,
+                    'last_pickup_addresss' => $pickup_location ?? null,
+                    'final_placement_outcome' => $final_placement_outcome ?? null
+                ];
+
+                $register_placement = $db->execute($sql_placement, $params_placement);
+                if (!$register_placement) {
+                    $error_message = "Error occurred, try again later";
+                    header("Location: ../register-step-2.php?error=" . $error_message . "&step=2");
+                    exit;
+                }
+                $success_message = "Proceed to Step 3";
+                header("Location: ../register-step-3.php?forster_id=" . $foster_id . "&success=" . $success_message . "&step=3");
+                exit;
+            } elseif ($step == 3) {
+                $school_name =  trim(filter_input(INPUT_POST, "school_name", FILTER_SANITIZE_SPECIAL_CHARS));
+                $event_attend =  trim(filter_input(INPUT_POST, "event_attend", FILTER_SANITIZE_SPECIAL_CHARS));
+                $pet =  trim(filter_input(INPUT_POST, "pet", FILTER_SANITIZE_SPECIAL_CHARS));
+                $holiday =  trim(filter_input(INPUT_POST, "holiday", FILTER_SANITIZE_SPECIAL_CHARS));
+                $fun_fact =  trim(filter_input(INPUT_POST, "fun_fact", FILTER_SANITIZE_SPECIAL_CHARS));
+                $foster_id =  trim(filter_input(INPUT_POST, "foster_id", FILTER_SANITIZE_SPECIAL_CHARS));
+
+                //Insert to Placement table
+                $sql_experience = "INSERT INTO foster_experiences (
+                foster_id,school_name,
+                events_attended,
+                favourite_activities,
+                pets,
+                holidays
+                ) 
+                VALUES (
+                :foster_id,
+                :school_name,
+                :events_attended,
+                :favourite_activities,
+                :pets,
+                :holidays
+                )";
+                $params_experience = [
+                    'foster_id' => $foster_id,
+                    'school_name' => $school_name ?? null,
+                    'events_attended' => $events_attended ?? null,
+                    'favourite_activities' => $fun_fact ?? null,
+                    'pets' => $pets ?? null,
+                    'holidays' => $holidays ?? null
+                ];
+
+                $register_placement = $db->execute($sql_experience, $params_experience);
+                if (!$register_placement) {
+                    $error_message = "Error occurred, try again later";
+                    header("Location: ../register-step-3.php?error=" . $error_message . "&step=2");
+                    exit;
+                }
+                $success_message = "Registration completed successfully, Kindly check your email to verify your account";
+                header("Location: ../login.php?&success=" . $success_message);
+                exit;
             } else {
-                $error_message = "get method not allowed";
+                $error_message = "Invalid step";
                 header("Location: ../register.php?error=" . $error_message);
-            }
-        } elseif ($step == 2) {
-
-            $date_of_admission =  trim(filter_input(INPUT_POST, "date_of_admission", FILTER_SANITIZE_SPECIAL_CHARS));
-            $date_of_leaving =  trim(filter_input(INPUT_POST, "date_of_leaving", FILTER_SANITIZE_SPECIAL_CHARS));
-            $foster_parent_name =  trim(filter_input(INPUT_POST, "foster_parent_name", FILTER_SANITIZE_SPECIAL_CHARS));
-            $case_worker_name =  trim(filter_input(INPUT_POST, "case_worker_name", FILTER_SANITIZE_SPECIAL_CHARS));
-            $foster_id =  trim(filter_input(INPUT_POST, "foster_id", FILTER_SANITIZE_SPECIAL_CHARS));
-
-            //Insert to Placement table
-            $sql_placement = "INSERT INTO foster_placements (foster_id,date_of_admission,date_of_leaving,foster_parent_name,case_worker_name) VALUES (:foster_id,:date_of_admission,:date_of_leaving,:foster_parent_name,:case_worker_name)";
-            $params_placement = [
-                'foster_id' => $foster_id,
-                'date_of_admission' => $date_of_admission,
-                'date_of_leaving' => $date_of_leaving,
-                'foster_parent_name' => $foster_parent_name,
-                'case_worker_name' => $case_worker_name
-            ];
-            $register_placement = $db->execute($sql_placement, $params_placement);
-            if (!$register_placement) {
-                $error_message = "Error occurred, try again later";
-                header("Location: ../register-step2.php?error=" . $error_message . "&step=2");
                 exit;
             }
-            $success_message = "Proceed to Step 3";
-            header("Location: ../register-step3.php?forster_id=" . $foster_id . "&success=" . $success_message . "&step=3");
-            exit;
-        } elseif ($step == 3) {
-            # code...
         } else {
-            $error_message = "Invalid step";
+            $error_message = "Permission denied";
             header("Location: ../register.php?error=" . $error_message);
             exit;
         }
     } else {
         $error_message = "get method not allowed";
         header("Location: ../register.php?error=" . $error_message);
-        exit;
     }

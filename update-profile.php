@@ -95,7 +95,7 @@ $result_logged = $db->fetch($logged_sql, ['foster_id' => $user_id]);
                                     </div>
                                 <?php } ?>
                                 <!-- Profile Settings Form -->
-                                <form action="backend/update-profile.php" method="post">
+                                <form action="backend/update-profile.php" method="post" enctype="multipart/form-data">
                                     <div class="row form-row">
                                         <div class="col-12 col-md-12">
                                             <div class="form-group">
@@ -106,7 +106,7 @@ $result_logged = $db->fetch($logged_sql, ['foster_id' => $user_id]);
                                                     <div class="upload-img">
                                                         <div class="change-photo-btn">
                                                             <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                            <input type="file" name="profile-image" class="upload" id="uploadImage">
+                                                            <input type="file" name="profile-image" class="upload" id="uploadImage" accept="image/*">
                                                         </div>
                                                         <input type="hidden" name="user_id" id="user_id" value="<?= $result_user['id'] ?>">
                                                         <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>

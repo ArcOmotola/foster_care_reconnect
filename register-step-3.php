@@ -70,8 +70,8 @@ if (isset($_GET['forster_id'])) {
                                         <div class="payment-list">
 
                                             <div class="row">
-                                                <input type="text" name="step" id="" value="<?= $step ?>">
-                                                <input type="text" name="foster_id" id="" value="<?= $foster_id ?>">
+                                                <input type="text" name="step" id="" value="<?= $step ?>" hidden>
+                                                <input type="text" name="foster_id" id="" value="<?= $foster_id ?>" hidden>
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
                                                         <label>School Name</label>
@@ -80,7 +80,7 @@ if (isset($_GET['forster_id'])) {
                                                 </div>
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
-                                                        <label>Event Attend so far</label>
+                                                        <label>favorite activity</label>
                                                         <input class="form-control" type="text" name="event_attend" required>
                                                     </div>
                                                 </div>
@@ -93,15 +93,14 @@ if (isset($_GET['forster_id'])) {
 
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
-                                                        <label>Holiday</label>
+                                                        <label>Favorite Holiday</label>
                                                         <input class="form-control" type="text" name="holiday" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
-                                                        <label>Favoriate activity Tag</label>
-                                                        <input class="form-control" type="text" name="case_worker_name" required>
+                                                        <label>Memories & Fun fact Tags</label>
                                                         <textarea name="fun_fact" id="" class="form-control" placeholder="Fun fact #Mick, #Maggie #Scooby"></textarea>
                                                     </div>
                                                 </div>
