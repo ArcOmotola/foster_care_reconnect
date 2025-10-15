@@ -56,6 +56,7 @@ class Database
             $this->createFosterPlacementTable();
             $this->createFosterExperienceTable();
             $this->createFosterConnectionTable();
+            $this->createLoggerTable();
         } catch (PDOException $e) {
             exit('Database Connection Failed: ' . $e->getMessage());
         }
@@ -99,6 +100,7 @@ class Database
             email VARCHAR(255) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
             status BOOLEAN DEFAULT TRUE,
+            contact_number VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE CASCADE,
             FOREIGN KEY (state_id) REFERENCES states(id) ON DELETE CASCADE
@@ -145,7 +147,6 @@ class Database
     {
         $sql = "CREATE TABLE IF NOT EXISTS foster_placements (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(255) NOT NULL,
                 foster_id INT NOT NULL,
                 placement_name VARCHAR(255)  NULL,
                 placement_reason VARCHAR(255)  NULL,
@@ -166,6 +167,9 @@ class Database
      *
      * @return void
      */
+
+    // Foster Experience Table
+
     private function createFosterExperienceTable()
     {
         $sql = "CREATE TABLE IF NOT EXISTS foster_experiences (
@@ -199,6 +203,25 @@ class Database
             )";
         $this->pdo->exec($sql);
     }
+
+    private function createLoggerTable()
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS loggers (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                foster_id INT NOT NULL,
+                log_type VARCHAR(255) NOT NULL,
+                actions VARCHAR(255) NULL,
+                message VARCHAR(255) NULL,
+                status BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (foster_id) REFERENCES fosters(id) ON DELETE CASCADE
+            )";
+        $this->pdo->exec($sql);
+    }
+
+    //Foster Relationship with Home Table
+
+
 
     // Method to execute SELECT queries
     public function fetchAll($query, $params = [])

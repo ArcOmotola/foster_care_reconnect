@@ -8,25 +8,36 @@ $db = new Database();
 //Check if foster home has data in the using country_id for USA which is 231
 $foster_home_sql = "SELECT * FROM foster_homes";
 $result_foster_home = $db->fetchAll($foster_home_sql);
-if (empty($result_foster_home)) {
-  //Insert dummy data into foster_homes table
-  $insert_sql = "INSERT INTO foster_homes (foster_name, country_id, state_id, home_address, contact_number, cover_image, email, password) VALUES
-    ('Happy Tails Foster Home', 231, 1, '123 Main St, Los Angeles, CA', '555-1234', 'cover1.jpg', 'dH1oX@example.com', md5('password10')),
-    ('Safe Haven Foster Care', 231, 2, '456 Oak St, New York, NY', '555-5678', 'cover2.jpg', 'oV9mD@example.com', md5('password10')),
-    ('Forever Friends Foster Home', 231, 3, '789 Pine St, Chicago, IL', '555-8765', 'cover3.jpg', 'a6TlO@example.com', md5('password10')),
-    ('Loving Arms Foster Care', 231, 4, '321 Maple St, Houston, TX', '555-4321', 'cover4.jpg', 'qH1oX@example.com', md5('password10')),
-    ('New Beginnings Foster Home', 231, 1, '654 Cedar St, Phoenix, AZ', '555-6789', 'cover5.jpg', 'lH1oX@example.com', md5('password10')),
-    ('Bright Futures Foster Care', 231, 2, '987 Birch St, Philadelphia, PA', '555-9876', 'cover6.jpg', 'kH1oX@example.com', md5('password10')),
-    ('Caring Hearts Foster Home', 231, 3, '147 Spruce St, San Antonio, TX', '555-2468', 'cover7.jpg', 'rH1oX@example.com', md5('password10')),
-    ('Hopeful Hearts Foster Care', 231, 4, '258 Walnut St, Dallas, TX', '555-1357', 'cover8.jpg', 'wH1oX@example.com', md5('password10')),
-    ('Second Chance Foster Home', 231, 1, '369 Chestnut St, San Diego, CA', '555-8642', 'cover9.jpg', 'xH1oX@example.com', md5('password10')),
-    ('Healthy Hearts Foster Care', 231, 2, '789 Birch St, Austin, TX', '555-7531', 'cover10.jpg', 'yH1oX@example.com', md5('password10'));";
-  $db->execute($insert_sql);
-}
+// if (empty($result_foster_home)) {
+//   //Insert dummy data into foster_homes table
+//   $insert_sql = "INSERT INTO foster_homes (foster_name, country_id, state_id, home_address, contact_number, cover_image, email, password) VALUES
+//     ('Happy Tails Foster Home', 231, 1, '123 Main St, Los Angeles, CA', '555-1234', 'cover1.jpg', 'dH1oX@example.com', md5('password10')),
+//     ('Safe Haven Foster Care', 231, 2, '456 Oak St, New York, NY', '555-5678', 'cover2.jpg', 'oV9mD@example.com', md5('password10')),
+//     ('Forever Friends Foster Home', 231, 3, '789 Pine St, Chicago, IL', '555-8765', 'cover3.jpg', 'a6TlO@example.com', md5('password10')),
+//     ('Loving Arms Foster Care', 231, 4, '321 Maple St, Houston, TX', '555-4321', 'cover4.jpg', 'qH1oX@example.com', md5('password10')),
+//     ('New Beginnings Foster Home', 231, 1, '654 Cedar St, Phoenix, AZ', '555-6789', 'cover5.jpg', 'lH1oX@example.com', md5('password10')),
+//     ('Bright Futures Foster Care', 231, 2, '987 Birch St, Philadelphia, PA', '555-9876', 'cover6.jpg', 'kH1oX@example.com', md5('password10')),
+//     ('Caring Hearts Foster Home', 231, 3, '147 Spruce St, San Antonio, TX', '555-2468', 'cover7.jpg', 'rH1oX@example.com', md5('password10')),
+//     ('Hopeful Hearts Foster Care', 231, 4, '258 Walnut St, Dallas, TX', '555-1357', 'cover8.jpg', 'wH1oX@example.com', md5('password10')),
+//     ('Second Chance Foster Home', 231, 1, '369 Chestnut St, San Diego, CA', '555-8642', 'cover9.jpg', 'xH1oX@example.com', md5('password10')),
+//     ('Healthy Hearts Foster Care', 231, 2, '789 Birch St, Austin, TX', '555-7531', 'cover10.jpg', 'yH1oX@example.com', md5('password10'));";
+//   $db->execute($insert_sql);
+// }
 
 //Display random 4 states from USA (country_id = 231)
 $state_sql = "SELECT name FROM states WHERE country_id = 231 ORDER BY RAND() LIMIT 4";
 $result = $db->fetchAll($state_sql);
+
+
+//Admin
+$admin_sql = "SELECT * FROM admins";
+$admins = $db->fetchAll($admin_sql);
+if (empty($admins)) {
+  //Insert dummy data into foster_homes table
+  $insert_sql = "INSERT INTO admins (email, password) VALUES
+    ('admin@test.com', md5('1234567890'))";
+  $db->execute($insert_sql);
+}
 
 
 //Display random 8 foster homes from USA (country_id = 231)
@@ -43,56 +54,10 @@ if (empty($result_fosters)) {
     ('Omotola Jolade', 2, 'demo@test.com', md5('1234567890'), '123 Main St, Los Angeles, CA', '123-45-6789', '555-1234')";
   $db->execute($insert_sql);
 }
-//morked data for fosters
-$data = [
-  [
-    'name' => 'John Doe',
-    'nickname' => 'Johnny',
-    'rating' => 4.5,
-    'location' => 'New York, USA',
-    'image' => 'assets/img/foster/foster-1.png',
-  ],
-  [
-    'name' => 'Jane Smith',
-    'nickname' => 'Glory',
-    'rating' => 4.0,
-    'location' => 'San Francisco, USA',
-    'image' => 'assets/img/foster/foster-2.png',
 
-  ],
-  [
-    'name' => 'Alice Johnson',
-    'nickname' => 'Folody',
-    'rating' => 4.2,
-    'location' => 'Chicago, USA',
-    'image' => 'assets/img/foster/foster-3.png',
+$random_fosters = "SELECT * FROM fosters ORDER BY RAND() LIMIT 6";
+$result_fosters = $db->fetchAll($random_fosters);
 
-  ],
-  [
-    'name' => 'Bob Brown',
-    'nickname' => 'Reols',
-    'rating' => 3.8,
-    'location' => 'Seattle, USA',
-    'image' => 'assets/img/foster/foster-1.png',
-
-  ],
-  [
-    'name' => 'Charlie Davis',
-    'nickname' => 'Smart Guy',
-    'rating' => 4.6,
-    'location' => 'Austin, USA',
-    'image' => 'assets/img/foster/foster-3.png',
-
-
-  ],
-  [
-    'name' => 'Eve Wilson',
-    'nickname' => 'Holde',
-    'rating' => 4.3,
-    'location' => 'Boston, USA',
-    'image' => 'assets/img/foster/foster-2.png',
-  ]
-]
 ?>
 
 <body>
@@ -107,47 +72,78 @@ $data = [
     <?php
     require_once ROOT_PATH . 'includes/nav.php';
     ?>
-    <!-- Home Banner -->
 
-    <!-- /Home Banner -->
+    <?php if (isset($_SESSION['last_login_time'])) { ?>
+      <!-- Home Banner -->
 
-    <!-- Clinic and Specialities -->
-    <section class="section section-specialities">
-      <div class="container-fluid">
-        <div class="section-header text-center">
-          <h2>State we cover</h2>
-          <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-md-9">
-            <!-- Slider -->
-            <div class="specialities-slider slider">
-
-              <!-- Slider Item -->
-              <?php
-              if (empty($result)) { ?>
-                <h1>No Data available</h1>
-              <?php }
-              foreach ($result as $state) { ?>
-                <div class="speicality-item text-center">
-                  <div class="speicality-img">
-                    <img src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">
-                    <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                  </div>
-                  <p><?= $state['name'] ?></p>
-                </div>
-              <?php } ?>
-              <!-- /Slider Item -->
-
-
-
+      <section class="section section-search">
+        <div class="container-fluid">
+          <div class="banner-wrapper">
+            <div class="banner-header text-center">
+              <h4>Welcome <b class="text-primary"><?= $_SESSION['name'] ?></b>
+              </h4>
+              <h1>Search Foster, Connect with friends</h1>
             </div>
-            <!-- /Slider -->
 
+            <!-- Search -->
+            <div class="search-box">
+              <form action="templateshub.net">
+                <div class="form-group search-location">
+                  <input type="text" class="form-control" placeholder="Search Location">
+                  <span class="form-text">Based on your Location</span>
+                </div>
+                <div class="form-group search-info">
+                  <input type="text" class="form-control" placeholder="Search name">
+                  <span class="form-text">Ex : City, State or Name for Check up etc</span>
+                </div>
+                <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <!-- /Home Banner -->
+    <?php } else { ?>
+      <!-- Clinic and Specialities -->
+      <section class="section section-specialities">
+        <div class="container-fluid">
+          <div class="section-header text-center">
+            <h2>Find your long lost loved ones</h2>
+            <p class="sub-title">Reconnect Coverage.</p>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-9">
+              <!-- Slider -->
+              <div class="specialities-slider slider">
+
+                <!-- Slider Item -->
+                <?php
+                if (empty($result)) { ?>
+                  <h1>No Data available</h1>
+                <?php }
+                foreach ($result as $state) { ?>
+                  <div class="speicality-item text-center">
+                    <div class="speicality-img">
+                      <img src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">
+                      <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                    </div>
+                    <p><?= $state['name'] ?></p>
+                  </div>
+                <?php } ?>
+                <!-- /Slider Item -->
+
+
+
+              </div>
+              <!-- /Slider -->
+
+            </div>
+          </div>
+        </div>
+      </section>
+    <?php } ?>
+
+
     <!-- Clinic and Specialities -->
 
     <!-- Popular Section -->
@@ -156,13 +152,13 @@ $data = [
         <div class="row">
           <div class="col-lg-4">
             <div class="section-header ">
-              <h2>Fosters you may know</h2>
-              <p>Lorem Ipsum is simply dummy text </p>
+              <h2>People you may know</h2>
+              <p>When loved ones drift apart, we map a way back. Search, verify, and reconnect with the people who matter most safely and simply.</p>
             </div>
             <div class="about-content">
-              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>
+              <!-- <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>
               <p>web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes</p>
-              <a href="javascript:;">Read More..</a>
+              <a href="javascript:;">Read More..</a> -->
             </div>
           </div>
           <div class="col-lg-8">
@@ -170,11 +166,11 @@ $data = [
 
 
               <!-- Doctor Widget -->
-              <?php foreach ($data as $foster) { ?>
+              <?php foreach ($result_fosters as $foster) { ?>
                 <div class="profile-widget">
                   <div class="doc-img">
                     <a href="#">
-                      <img class="img-fluid" alt="User Image" src="<?= $foster['image'] ?>">
+                      <img class="img-fluid" alt="User Image" src="<?= $foster['profile_image'] == "" ? "assets/img/foster/foster-3.png" : "assets/img/foster/" . $foster['profile_image'] ?>">
                     </a>
                     <a href="javascript:void(0)" class="fav-btn">
                       <i class="far fa-bookmark"></i>
@@ -187,21 +183,39 @@ $data = [
                       </a>
                       <i class="fas fa-check-circle verified"></i>
                     </h3>
-                    <p class="speciality"> <? $foster['nickname'] ?></p>
+                    <p class="speciality"> <?= $foster['ssn'] ?></p>
 
                     <ul class="available-info">
                       <li>
-                        <i class="fas fa-map-marker-alt"></i> <?= $foster['location'] ?>
+                        <i class="fas fa-map-marker-alt"></i> <?= $foster['phone_number'] ?>
+                      </li>
+                      <li>
+                        <?php
+                        $current_year = date('Y');
+                        // echo explode("-", $foster['dob'])[0];
+                        $age = $current_year - explode("-", $foster['dob'])[0]; ?>
+                        <i class="fas fa-map-marker-alt"></i> Age: <b><?= $age ?> </b> years old
                       </li>
 
                     </ul>
                     <div class="row row-sm">
                       <div class="col-6">
-                        <a href="#" class="btn view-btn">View Profile</a>
+                        <a href="profile.php" class="btn view-btn">View Profile</a>
                       </div>
-                      <div class="col-6">
-                        <a href="#" class="btn book-btn">Chat Now</a>
-                      </div>
+                      <?php
+                      $current_year = date('Y');
+                      // echo explode("-", $foster['dob'])[0];
+                      $age = $current_year - explode("-", $foster['dob'])[0];
+
+                      if ($age < 18) { ?>
+                        <div class="col-6">
+                          <a href="#" disabled class="btn btn-danger">Minor</a>
+                        </div>
+                      <?php } else { ?>
+                        <div class="col-6">
+                          <a href="#" class="btn book-btn">Chat Now</a>
+                        </div>
+                      <?php } ?>
                     </div>
                   </div>
                 </div>
@@ -226,7 +240,7 @@ $data = [
           </div>
           <div class="col-md-7">
             <div class="section-header">
-              <h2 class="mt-2">Foster centers near you..</h2>
+              <h2 class="mt-2">Foster Homes near you</h2>
               <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
             </div>
             <div class="features-slider slider">

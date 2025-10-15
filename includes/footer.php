@@ -12,7 +12,7 @@
                             <img src="assets/img/logo.png" alt="logo">
                         </div>
                         <div class="footer-about-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>A path to reunite. </p>
                             <div class="social-icon">
                                 <ul>
                                     <li>
@@ -57,15 +57,13 @@
 
                     <!-- Footer Widget -->
                     <div class="footer-widget footer-menu">
-                        <h2 class="footer-title">For Agent</h2>
+                        <h2 class="footer-title">For Social Worker</h2>
                         <ul>
-                            <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-                            <li><a href="/login.php"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                            <li><a href="/social-worker-login.php"><i class="fas fa-angle-double-right"></i> Login</a></li>
 
                         </ul>
                     </div>
                     <!-- /Footer Widget -->
-
                 </div>
 
                 <div class="col-lg-3 col-md-6">

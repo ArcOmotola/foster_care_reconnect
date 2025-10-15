@@ -12,10 +12,10 @@ if (isset($_POST['submit'])) {
     if ($email == "" || $password == "") {
         $error_message = "Required field can not be empty";
     } else {
-        $sql = "SELECT id,email, password FROM fosters WHERE email = :email";
+        $sql = "SELECT id,email,name, password FROM fosters WHERE email = :email";
         $query = $db->fetch($sql, ['email' => $email]);
         if (empty($query)) {
-            $error_message = "foster not exists,Kindly check.";
+            $error_message = "User doe not exist, Please register.";
             header("Location: ../login.php?error=" . $error_message);
         } else {
             //checking if password is correct
@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
                 exit;
             }
             //check if account is verified
-            if ($query['is_verified'] != 1) {
+            if ($query['is_verified'] === 0) {
                 $error_message = "kindly verify your account, check your email for verification process, thanks.";
                 header("Location: ../login.php?error=" . $error_message);
                 exit;
