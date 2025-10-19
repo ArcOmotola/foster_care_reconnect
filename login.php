@@ -1,4 +1,5 @@
 <?php
+$title = "Login";
 require_once 'includes/config/path.php';
 require_once ROOT_PATH . 'includes/header.php';
 require_once ROOT_PATH . 'includes/function.php';

@@ -90,21 +90,18 @@ if (isset($_GET['forster_id'])) {
                                                         <input class="form-control" type="text" name="pet" required>
                                                     </div>
                                                 </div>
-
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
                                                         <label>Favorite Holiday</label>
                                                         <input class="form-control" type="text" name="holiday" required>
                                                     </div>
                                                 </div>
-
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group card-label">
                                                         <label>Memories & Fun fact Tags</label>
                                                         <textarea name="fun_fact" id="" class="form-control" placeholder="Fun fact #Mick, #Maggie #Scooby"></textarea>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
 

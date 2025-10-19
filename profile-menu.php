@@ -7,7 +7,7 @@
                     if (empty($result_user['profile_image'])) { ?>
                         <img src="assets/img/patients/patient.jpg" alt="User Image">
                     <?php } else { ?>
-                        <img src="assets/img/patients/" <?= $result_user['profile_image'] ?>alt="User Image">
+                        <img src="<?= $result_user['profile_image'] ?>" User Image">
                     <?php } ?>
                 </a>
                 <div class="profile-det-info">
@@ -66,6 +66,18 @@
                 <a href="profile-change-password.php">
                     <i class="fas fa-lock"></i>
                     <span>Change Password</span>
+                </a>
+            </li>
+            <li>
+                <a href="update-education.php">
+                    <i class="fas fa-lock"></i>
+                    <span>Education</span>
+                </a>
+            </li>
+            <li>
+                <a href="update-placement.php">
+                    <i class="fas fa-lock"></i>
+                    <span>Placement</span>
                 </a>
             </li>
             <li>

@@ -96,7 +96,6 @@ if (isset($_GET['forster_id'])) {
                                                         <input class="form-control" type="text" name="final_placement_outcome" required>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
 

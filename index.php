@@ -87,16 +87,12 @@ $result_fosters = $db->fetchAll($random_fosters);
 
             <!-- Search -->
             <div class="search-box">
-              <form action="templateshub.net">
-                <div class="form-group search-location">
-                  <input type="text" class="form-control" placeholder="Search Location">
-                  <span class="form-text">Based on your Location</span>
-                </div>
+              <form action="search.php" method="get">
                 <div class="form-group search-info">
                   <input type="text" class="form-control" placeholder="Search name">
                   <span class="form-text">Ex : City, State or Name for Check up etc</span>
                 </div>
-                <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
+                <button type="submit" name="search" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
               </form>
             </div>
           </div>
@@ -131,9 +127,6 @@ $result_fosters = $db->fetchAll($random_fosters);
                   </div>
                 <?php } ?>
                 <!-- /Slider Item -->
-
-
-
               </div>
               <!-- /Slider -->
 
@@ -170,7 +163,7 @@ $result_fosters = $db->fetchAll($random_fosters);
                 <div class="profile-widget">
                   <div class="doc-img">
                     <a href="#">
-                      <img class="img-fluid" alt="User Image" src="<?= $foster['profile_image'] == "" ? "assets/img/foster/foster-3.png" : "assets/img/foster/" . $foster['profile_image'] ?>">
+                      <img class="img-fluid" alt="User Image" src="<?= $foster['profile_image'] == "" ? "assets/img/foster/foster-3.png" :  $foster['profile_image'] ?>">
                     </a>
                     <a href="javascript:void(0)" class="fav-btn">
                       <i class="far fa-bookmark"></i>
@@ -193,14 +186,15 @@ $result_fosters = $db->fetchAll($random_fosters);
                         <?php
                         $current_year = date('Y');
                         // echo explode("-", $foster['dob'])[0];
-                        $age = $current_year - explode("-", $foster['dob'])[0]; ?>
+                        $age = $current_year - explode("-", $foster['dob'])[0];
+                        ?>
                         <i class="fas fa-map-marker-alt"></i> Age: <b><?= $age ?> </b> years old
                       </li>
 
                     </ul>
                     <div class="row row-sm">
                       <div class="col-6">
-                        <a href="profile.php" class="btn view-btn">View Profile</a>
+                        <a href="my-profile.php?uid=<?= $foster['verification_token'] ?>" class="btn view-btn">View Profile</a>
                       </div>
                       <?php
                       $current_year = date('Y');
@@ -209,11 +203,11 @@ $result_fosters = $db->fetchAll($random_fosters);
 
                       if ($age < 18) { ?>
                         <div class="col-6">
-                          <a href="#" disabled class="btn btn-danger">Minor</a>
+                          <a href="backend/contact.php?uid=<?= $foster['verification_token'] ?>" disabled class=" btn btn-danger">Minor</a>
                         </div>
                       <?php } else { ?>
                         <div class="col-6">
-                          <a href="#" class="btn book-btn">Chat Now</a>
+                          <a href="backend/add-connect.php?uid=<?= $foster['verification_token'] ?>" class="btn book-btn">Add Connect</a>
                         </div>
                       <?php } ?>
                     </div>

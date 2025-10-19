@@ -154,38 +154,6 @@ $result_user = $db->fetch($user_sql, ['user_id' => $user_id]);
     </div>
     <!-- /Main Wrapper -->
 
-    <!-- Add Medical Records Modal -->
-    <div class="modal fade custom-modal" id="add_medical_records">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Medical Records</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Date</label>
-                            <input type="text" class="form-control datetimepicker" value="31-10-2019">
-                        </div>
-                        <div class="form-group">
-                            <label>Description ( Optional )</label>
-                            <textarea class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Upload File</label>
-                            <input type="file" class="form-control">
-                        </div>
-                        <div class="submit-section text-center">
-                            <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                            <button type="button" class="btn btn-secondary submit-btn" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- /Add Medical Records Modal -->
 
     <?php
     require_once ROOT_PATH . 'includes/script.php';
