@@ -26,6 +26,10 @@ $result_user = $db->fetch($user_sql, ['user_id' => $user_id]);
 
 $logged_sql = "SELECT * FROM loggers WHERE foster_id = :foster_id ORDER BY id DESC LIMIT 10";
 $result_logged = $db->fetch($logged_sql, ['foster_id' => $user_id]);
+
+//Foster Placement
+$foster_placements = "SELECT * FROM foster_placements WHERE foster_id = :foster_id";
+$result_foster_placements = $db->fetch($foster_placements, ['foster_id' => $result_user['id']]);
 ?>
 
 <body>
@@ -48,10 +52,10 @@ $result_logged = $db->fetch($logged_sql, ['foster_id' => $user_id]);
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
+                                <li class="breadcrumb-item active" aria-current="page">Placement </li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Profile Settings</h2>
+                        <h2 class="breadcrumb-title">Update Placement</h2>
                     </div>
                 </div>
             </div>
@@ -96,68 +100,30 @@ $result_logged = $db->fetch($logged_sql, ['foster_id' => $user_id]);
                                 <?php } ?>
                                 <!-- Profile Settings Form -->
                                 <form action="backend/update-profile.php" method="post" enctype="multipart/form-data">
-                                    <input type="text" name="form_type" value="profile_update">
                                     <div class="row form-row">
-                                        <div class="col-12 col-md-12">
-                                            <div class="form-group">
-                                                <div class="change-avatar">
-                                                    <div class="profile-img">
-                                                        <?php
-                                                        if (empty($result_user['profile_image'])) { ?>
-                                                            <img src="assets/img/patients/patient.jpg" alt="User Image">
-                                                        <?php } else { ?>
-                                                            <img src="<?= $result_user['profile_image'] ?>" User Image">
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="upload-img">
-                                                        <div class="change-photo-btn">
-                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                            <input type="file" name="profile_image" class="upload" id="uploadImage" accept="image/*">
-                                                        </div>
-                                                        <input type="hidden" name="user_id" id="user_id" value="<?= $result_user['id'] ?>">
-                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
-                                                    </div>
-                                                </div>
+                                        <input type="hidden" name="form_type" value="placement">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Placement name</label>
+                                                <input class="form-control" type="text" name="placement_name" value="<?= $result_foster_placements['placement_name'] ?>" required>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Full Name</label>
-                                                <input type="text" name="name" class="form-control" value="<?= $result_user['name'] ?>">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Placement Reason</label>
+                                                <input class="form-control" type="text" name="placement_reason" value="<?= $result_foster_placements['placement_reason'] ?>" required>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="text" disabled name="name" class="form-control" value="<?= $result_user['email'] ?>">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Placement date</label>
+                                                <input class="form-control" type="date" name="last_pickup_date" value="<?= $result_foster_placements['last_pickup_date'] ?>" required>
                                             </div>
                                         </div>
-
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Date of Birth</label>
-                                                <div class="cal-icon">
-                                                    <input type="text" name="dob" class="form-control datetimepicker" value="<?= $result_user['dob'] ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Home Address</label>
-                                                <input type="text" name="address" class="form-control" value="<?= $result_user['address'] ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>SSN Number</label>
-                                                <input type="text" name="ssn" class="form-control" value="<?= $result_user['ssn'] ?>">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone Number</label>
-                                                <input type="text" name="phone_number" class="form-control" value="<?= $result_user['phone_number'] ?>">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Placement Outcome</label>
+                                                <input class="form-control" type="text" name="final_placement_outcome" value="<?= $result_foster_placements['final_placement_outcome'] ?>" required>
                                             </div>
                                         </div>
                                     </div>

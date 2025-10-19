@@ -26,6 +26,11 @@ $result_user = $db->fetch($user_sql, ['user_id' => $user_id]);
 
 $logged_sql = "SELECT * FROM loggers WHERE foster_id = :foster_id ORDER BY id DESC LIMIT 10";
 $result_logged = $db->fetch($logged_sql, ['foster_id' => $user_id]);
+
+//Foster Experience
+$foster_experiences = "SELECT * FROM foster_experiences WHERE foster_id = :foster_id";
+$result_foster_experiences = $db->fetch($foster_experiences, ['foster_id' => $result_user['id']]);
+
 ?>
 
 <body>
@@ -96,68 +101,33 @@ $result_logged = $db->fetch($logged_sql, ['foster_id' => $user_id]);
                                 <?php } ?>
                                 <!-- Profile Settings Form -->
                                 <form action="backend/update-profile.php" method="post" enctype="multipart/form-data">
-                                    <input type="text" name="form_type" value="profile_update">
+                                    <input type="hidden" name="form_type" value="education">
                                     <div class="row form-row">
-                                        <div class="col-12 col-md-12">
-                                            <div class="form-group">
-                                                <div class="change-avatar">
-                                                    <div class="profile-img">
-                                                        <?php
-                                                        if (empty($result_user['profile_image'])) { ?>
-                                                            <img src="assets/img/patients/patient.jpg" alt="User Image">
-                                                        <?php } else { ?>
-                                                            <img src="<?= $result_user['profile_image'] ?>" User Image">
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="upload-img">
-                                                        <div class="change-photo-btn">
-                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                            <input type="file" name="profile_image" class="upload" id="uploadImage" accept="image/*">
-                                                        </div>
-                                                        <input type="hidden" name="user_id" id="user_id" value="<?= $result_user['id'] ?>">
-                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Full Name</label>
-                                                <input type="text" name="name" class="form-control" value="<?= $result_user['name'] ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="text" disabled name="name" class="form-control" value="<?= $result_user['email'] ?>">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>School Name</label>
+                                                <input class="form-control" type="text" name="school_name" value="<?= $result_foster_experiences['school_name'] ?>" required>
                                             </div>
                                         </div>
 
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Date of Birth</label>
-                                                <div class="cal-icon">
-                                                    <input type="text" name="dob" class="form-control datetimepicker" value="<?= $result_user['dob'] ?>">
-                                                </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Pet</label>
+                                                <input class="form-control" type="text" name="pets" value="<?= $result_foster_experiences['pets'] ?>" required>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Home Address</label>
-                                                <input type="text" name="address" class="form-control" value="<?= $result_user['address'] ?>">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Favorite Holiday</label>
+                                                <input class="form-control" type="text" name="holidays" value="<?= $result_foster_experiences['holidays'] ?>" required>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>SSN Number</label>
-                                                <input type="text" name="ssn" class="form-control" value="<?= $result_user['ssn'] ?>">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone Number</label>
-                                                <input type="text" name="phone_number" class="form-control" value="<?= $result_user['phone_number'] ?>">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Memories & Fun fact Tags</label>
+                                                <textarea name="favourite_activities" id="" class="form-control" placeholder="Fun fact #Mick, #Maggie #Scooby">
+  <?= $result_foster_experiences['favourite_activities'] ?>
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>

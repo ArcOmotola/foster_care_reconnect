@@ -63,7 +63,6 @@ class Database
     }
 
     // Create admins table if it doesn't exist
-
     /**
      * createAdminsTable.
      *
@@ -167,9 +166,7 @@ class Database
      *
      * @return void
      */
-
     // Foster Experience Table
-
     private function createFosterExperienceTable()
     {
         $sql = "CREATE TABLE IF NOT EXISTS foster_experiences (
@@ -219,16 +216,11 @@ class Database
         $this->pdo->exec($sql);
     }
 
-    //Foster Relationship with Home Table
-
-
-
     // Method to execute SELECT queries
     public function fetchAll($query, $params = [])
     {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($params);
-
         return $stmt->fetchAll();
     }
 
@@ -237,7 +229,6 @@ class Database
     {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($params);
-
         return $stmt->fetch();
     }
 
@@ -245,7 +236,6 @@ class Database
     public function execute($query, $params = [])
     {
         $stmt = $this->pdo->prepare($query);
-
         return $stmt->execute($params);
     }
 
