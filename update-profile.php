@@ -96,7 +96,7 @@ $result_logged = $db->fetch($logged_sql, ['foster_id' => $user_id]);
                                 <?php } ?>
                                 <!-- Profile Settings Form -->
                                 <form action="backend/update-profile.php" method="post" enctype="multipart/form-data">
-                                    <input type="text" name="form_type" value="profile_update">
+                                    <input type="hidden" name="form_type" value="profile_update">
                                     <div class="row form-row">
                                         <div class="col-12 col-md-12">
                                             <div class="form-group">
