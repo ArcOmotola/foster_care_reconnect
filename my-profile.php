@@ -6,9 +6,9 @@ require_once ROOT_PATH . 'includes/function.php';
 $db = new Database();
 
 //Check if user is logged In
-if (!$db->CheckLogin()) {
-    header("Location: login.php");
-}
+// if (!$db->CheckLogin()) {
+//     header("Location: login.php");
+// }
 
 if (isset($_GET['error'])) {
     $error_message = $_GET['error'];
@@ -87,12 +87,13 @@ if ($_GET['uid']) {
                         <div class="doctor-widget">
                             <div class="doc-info-left">
                                 <div class="doctor-img">
-                                    <img src="assets/img/doctors/doctor-thumb-02.jpg" class="img-fluid" alt="User Image">
+                                    <img class="img-fluid" alt="User Image" src="<?= $result_user['profile_image'] == "" ? "assets/img/foster/foster-3.png" :  $result_user['profile_image'] ?>">
+                                    <!-- <img src="assets/img/doctors/doctor-thumb-01.jpg" class="img-fluid" alt="User Image"> -->
+
                                 </div>
                                 <div class="doc-info-cont">
                                     <h4 class="doc-name"><?= $result_user['name']  ?></h4>
-                                    <p class="doc-speciality"><?= $result_user['email']  ?></p>
-
+                                    <p class="doc-speciality"><?= $result_user['email'] ?></p>
                                     <div class="clinic-details">
                                         <p class="doc-location"><i class="fas fa-map-marker-alt"></i> <?= $result_user['address'] ?></p>
                                         <p class="doc-location"><i class="fas fa-house"></i> Foster Home: <?= $result_home['foster_name'] ?>- </p>

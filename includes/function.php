@@ -57,6 +57,7 @@ class Database
             $this->createFosterExperienceTable();
             $this->createFosterConnectionTable();
             $this->createLoggerTable();
+            $this->createFosterConnectTable();
         } catch (PDOException $e) {
             exit('Database Connection Failed: ' . $e->getMessage());
         }
@@ -213,6 +214,19 @@ class Database
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (foster_id) REFERENCES fosters(id) ON DELETE CASCADE
             )";
+        $this->pdo->exec($sql);
+    }
+    private function createFosterConnectTable()
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS foster_connects (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        foster_id INT NOT NULL,
+        connect_id INT NOT NULL,        
+        status ENUM('pending', 'accepted', 'rejected') DEFAULT 'accepted',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (foster_id) REFERENCES fosters(id) ON DELETE CASCADE,
+        FOREIGN KEY (connect_id) REFERENCES fosters(id) ON DELETE CASCADE
+    )";
         $this->pdo->exec($sql);
     }
 

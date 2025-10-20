@@ -23,6 +23,20 @@ $user_id = $_SESSION['id'];
 
 $user_sql = "SELECT * FROM fosters WHERE id = :user_id";
 $result_user = $db->fetch($user_sql, ['user_id' => $user_id]);
+
+
+$connect_sql = "SELECT fosters.*, foster_connects.* FROM foster_connects 
+JOIN fosters on fosters.id = foster_connects.connect_id
+WHERE (foster_id = :foster_id)
+ORDER BY foster_connects.created_at DESC";
+$connect_users = $db->fetchAll($connect_sql, ['foster_id' => $user_id]);
+
+$connect_sql_2 = "SELECT fosters.*, foster_connects.* FROM foster_connects 
+JOIN fosters on fosters.id = foster_connects.foster_id
+WHERE (connect_id = :foster_id)
+ORDER BY foster_connects.created_at DESC";
+$connect_users_2 = $db->fetchAll($connect_sql_2, ['foster_id' => $user_id]);
+$merge_result = array_merge($connect_users, $connect_users_2);
 ?>
 
 <body>
@@ -75,69 +89,48 @@ $result_user = $db->fetch($user_sql, ['user_id' => $user_id]);
 
                     </div>
 
-                    <div class="col-md-7 col-lg-8 col-xl-9 dct-appoinment">
-                        <div class="card">
-                            <div class="card-body pt-0">
-                                <div class="user-tabs">
-                                    <ul class="nav nav-tabs nav-tabs-bottom nav-justified flex-wrap">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#pat_appointments" data-toggle="tab">Fosters friends</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                                <div class="tab-content">
-
-                                    <!-- Appointment Tab -->
-                                    <div id="pat_appointments" class="tab-pane fade show active">
-                                        <div class="card card-table mb-0">
+                    <div class="col-md-7 col-lg-8 col-xl-9">
+                        <center>
+                            <h2 class="center text-info mb-4">Foster friends</h2>
+                        </center>
+                        <div class="row row-grid">
+                            <?php
+                            if (!empty($merge_result)) {
+                                foreach ($merge_result as $connect) { ?>
+                                    <div class="col-md-6 col-lg-4 col-xl-3">
+                                        <div class="card widget-profile pat-widget-profile">
                                             <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover table-center mb-0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Connected Date</th>
-                                                                <th>Last chat</th>
-                                                                <th>Status</th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <h2 class="table-avatar">
-                                                                        <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-                                                                            <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
-                                                                        </a>
-                                                                        <a href="doctor-profile.html">Filter Elder </a>
-                                                                    </h2>
-                                                                </td>
-                                                                <td>14 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
-                                                                <td>16 Nov 2019</td>
-                                                                <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-                                                                <td class="text-right">
-                                                                    <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                                                            <i class="far fa-edit"></i> Edit
-                                                                        </a>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                <div class="pro-widget-content">
+                                                    <div class="profile-info-widget">
+                                                        <a href="my-profile.php?uid=<?= $connect['verification_token'] ?>" class="booking-doc-img">
+                                                            <img class="img-fluid" alt="User Image" src="<?= $connect['profile_image'] == "" ? "assets/img/foster/foster-3.png" :  $connect['profile_image'] ?>">
+                                                        </a>
+                                                        <div class="profile-det-info">
+                                                            <h3><a href="my-profile.php?uid=<?= $connect['verification_token'] ?>"><?= $connect['name'] ?></a></h3>
 
-                                                        </tbody>
-                                                    </table>
+                                                            <div class="patient-details">
+                                                                <h5><b>Phone Number :</b> <?= $connect['phone_number'] ?></h5>
+                                                                <!-- <h5 class="mb-0"><i class="fas fa-map-marker-alt">Address :</i> <?= $connect['address'] ?></h5> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="patient-info">
+                                                    <ul>
+                                                        <li>Phone <span><?= $connect['phone_number'] ?></span></li>
+                                                        <li>Date of Birth <span><?= $connect['dob'] ?></span></li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
-
-                                </div>
-                            </div>
+                                <?php } ?>
+                            <?php } else {
+                                echo "<h1>No foster friends</h1>";
+                            } ?>
                         </div>
                     </div>
+
                 </div>
 
             </div>
