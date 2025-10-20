@@ -22,7 +22,9 @@
                 </a>
             </div>
             <ul class="main-nav">
-
+                <li class="active">
+                    <a href="search.php">Fosters</a>
+                </li>
                 <?php if (isset($_SESSION['last_login_time'])) { ?>
                     <li class="login-link">
                         <a href="profile.php">Profile</a>

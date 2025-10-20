@@ -24,8 +24,22 @@ $random_fosters = "SELECT * FROM fosters ORDER BY RAND() LIMIT 6";
 $result_fosters = $db->fetchAll($random_fosters);
 
 //search feature
-if (isset($_GET['search'])) {
+$merge_search_result = [];
+if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search = $_GET['search'];
+    //search fosters
+    $search_fosters = "SELECT * FROM fosters WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR phone_number LIKE '%$search%' OR address LIKE '%$search%'";
+    $search_result_fosters = $db->fetchAll($search_fosters);
+    $merge_search_result = array_merge($search_result_fosters);
+}
+
+//Foster search name
+if (isset($_GET['foster_name']) && !empty($_GET['foster_name'])) {
+    $search = $_GET['foster_name'];
+    //search fosters
+    $search_fosters = "SELECT * FROM fosters WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR phone_number LIKE '%$search%' OR address LIKE '%$search%'";
+    $search_result_fosters = $db->fetchAll($search_fosters);
+    $merge_search_result = array_merge($search_result_fosters);
 }
 
 ?>
@@ -52,7 +66,7 @@ if (isset($_GET['search'])) {
                                 <li class="breadcrumb-item active" aria-current="page">Search</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">2245 matches found for : </h2>
+                        <h2 class="breadcrumb-title"><?= count($merge_search_result) ?> matches found </h2>
                     </div>
 
                 </div>
@@ -76,7 +90,7 @@ if (isset($_GET['search'])) {
                                 <div class="card-body">
                                     <div class="filter-widget">
                                         <div class="cal-search">
-                                            <input type="text" class="form-control" placeholder="Enter foster name, city, state">
+                                            <input type="text" name="foster_name" value="<?= isset($_GET['foster_name']) ? $_GET['foster_name'] : "" ?>" class="form-control" placeholder="Enter foster name, city, state">
                                         </div>
                                     </div>
                                     <div class="filter-widget">
@@ -91,7 +105,6 @@ if (isset($_GET['search'])) {
                                             </div>
                                         <?php }
                                         ?>
-
                                     </div>
                                     <div class="filter-widget">
                                         <h4>Homes</h4>
@@ -99,7 +112,7 @@ if (isset($_GET['search'])) {
                                         foreach ($result_foster_homes as $home) { ?>
                                             <div>
                                                 <label class="custom_check">
-                                                    <input type="checkbox" name="home_name" value="<?= $home['foster_name'] ?>">
+                                                    <input type="checkbox" name="home_name" value="<?= $home['foster_name'] ?? "" ?>">
                                                     <span class="checkmark"></span> <?= $home['foster_name'] ?>
                                                 </label>
                                             </div>
@@ -108,7 +121,7 @@ if (isset($_GET['search'])) {
 
                                     </div>
                                     <div class="btn-search">
-                                        <button type="button" name="search" class="btn btn-block">Search</button>
+                                        <button type="submit" name="search" class="btn btn-block">Search</button>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +184,21 @@ if (isset($_GET['search'])) {
 
                                                 <div class="clinic-booking">
                                                     <a class="view-pro-btn" href="my-profile.php?uid=<?= $foster['verification_token'] ?>">View Profile</a>
-                                                    <a class="apt-btn" href="backend/add-connect.php?uid=<?= $foster['verification_token'] ?>">Add Connect</a>
+
+                                                    <?php
+                                                    $current_year = date('Y');
+                                                    // echo explode("-", $foster['dob'])[0];
+                                                    $age = $current_year - explode("-", $foster['dob'])[0];
+
+                                                    if ($age < 18) { ?>
+                                                        <!-- <div class="col-6"> -->
+                                                        <a class="apt-btn" href="backend/contact.php?uid=<?= $foster['verification_token'] ?>">Contact Social</a>
+                                                        <!-- </div> -->
+                                                    <?php } else { ?>
+                                                        <!-- <div class="col-6"> -->
+                                                        <a class="apt-btn" href="backend/add-connect.php?uid=<?= $foster['verification_token'] ?>">Add Connect</a>
+                                                        <!-- </div> -->
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,80 +206,77 @@ if (isset($_GET['search'])) {
                                 </div>
                             <?php } ?>
                             <div class="load-more text-center">
-                                <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
+                                <!-- <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a> -->
                             </div>
                         </div>
                     <?php } else { ?>
                         <div class="col-md-12 col-lg-8 col-xl-9">
                             <?php
-                            if (empty($result_fosters)) { ?>
+                            if (empty($merge_search_result)) { ?>
                                 <h1>No Data available 2</h1>
                             <?php }
-                            foreach ($result_fosters as $foster) { ?>
+                            foreach ($merge_search_result as $foster) { ?>
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="doctor-widget">
                                             <div class="doc-info-left">
                                                 <div class="doctor-img">
-                                                    <a href="doctor-profile.html">
-                                                        <img src="assets/img/doctors/doctor-thumb-01.jpg" class="img-fluid" alt="User Image">
+                                                    <a href="my-profile.php?uid=<?= $foster['verification_token'] ?>">
+                                                        <img class="img-fluid" alt="User Image" src="<?= $foster['profile_image'] == "" ? "assets/img/foster/foster-3.png" :  $foster['profile_image'] ?>">
+
                                                     </a>
                                                 </div>
                                                 <div class="doc-info-cont">
-                                                    <h4 class="doc-name"><a href="doctor-profile.html">Dr. Ruby Perrin</a></h4>
-                                                    <p class="doc-speciality">MDS - Periodontology and Oral Implantology, BDS</p>
-                                                    <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
-                                                    <div class="rating">
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <span class="d-inline-block average-rating">(17)</span>
-                                                    </div>
+                                                    <h4 class="doc-name"><a href="">
+                                                            <?= $foster['name'] ?>
+                                                        </a></h4>
+                                                    <!-- <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5> -->
+
                                                     <div class="clinic-details">
-                                                        <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Florida, USA</p>
-                                                        <ul class="clinic-gallery">
-                                                            <li>
-                                                                <a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">
-                                                                    <img src="assets/img/features/feature-01.jpg" alt="Feature">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="assets/img/features/feature-02.jpg" data-fancybox="gallery">
-                                                                    <img src="assets/img/features/feature-02.jpg" alt="Feature">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="assets/img/features/feature-03.jpg" data-fancybox="gallery">
-                                                                    <img src="assets/img/features/feature-03.jpg" alt="Feature">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="assets/img/features/feature-04.jpg" data-fancybox="gallery">
-                                                                    <img src="assets/img/features/feature-04.jpg" alt="Feature">
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                                        <p class="doc-location"><i class="fas fa-map-marker-alt"></i> <?= $foster['address'] ?></p>
+
                                                     </div>
                                                     <div class="clinic-services">
-                                                        <span>Dental Fillings</span>
-                                                        <span> Whitneing</span>
+                                                        <?php
+                                                        $foster_experiences = "SELECT * FROM foster_experiences WHERE foster_id = :foster_id";
+                                                        $result_foster_experiences = $db->fetch($foster_experiences, ['foster_id' => $foster['id']]);
+
+                                                        if (empty($result_foster_experiences)) {
+                                                            echo "No Data available";
+                                                        } else {
+                                                            $memories = $result_foster_experiences['favourite_activities'];
+                                                            if ($memories != null) {
+                                                                //Explode the memory into an array
+                                                                $exploded_memories = explode(",", $memories);
+                                                                foreach ($exploded_memories as $memory) {
+                                                                    echo '<span>' . $memory . '</span>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <!-- <span>Dental Fillings</span>
+                                                        <span> Whitneing</span> -->
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="doc-info-right">
-                                                <div class="clini-infos">
-                                                    <ul>
-                                                        <li><i class="far fa-thumbs-up"></i> 98%</li>
-                                                        <li><i class="far fa-comment"></i> 17 Feedback</li>
-                                                        <li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
-                                                        <li><i class="far fa-money-bill-alt"></i> $300 - $1000 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i> </li>
-                                                    </ul>
-                                                </div>
+
                                                 <div class="clinic-booking">
-                                                    <a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
-                                                    <a class="apt-btn" href="booking.html">Book Appointment</a>
+                                                    <a class="view-pro-btn" href="my-profile.php?uid=<?= $foster['verification_token'] ?>">View Profile</a>
+                                                    <?php
+                                                    $current_year = date('Y');
+                                                    // echo explode("-", $foster['dob'])[0];
+                                                    $age = $current_year - explode("-", $foster['dob'])[0];
+
+                                                    if ($age < 18) { ?>
+                                                        <div class="col-6">
+                                                            <a href="backend/contact.php?uid=<?= $foster['verification_token'] ?>" disabled class=" btn btn-danger">Contact Home</a>
+                                                        </div>
+                                                    <?php } else { ?>
+                                                        <div class="col-6">
+                                                            <a class="apt-btn" href="backend/add-connect.php?uid=<?= $foster['verification_token'] ?>">Add Connect</a>
+                                                        </div>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -264,7 +288,7 @@ if (isset($_GET['search'])) {
                             <!-- /Doctor Widget -->
 
                             <div class="load-more text-center">
-                                <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
+                                <!-- <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a> -->
                             </div>
                         </div>
                     <?php   } ?>

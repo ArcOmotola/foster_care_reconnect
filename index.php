@@ -79,7 +79,7 @@ $result_fosters = $db->fetchAll($random_fosters);
                   <input type="text" class="form-control" placeholder="Search name" name="search">
                   <span class="form-text">Ex : City, State or Name for Check up etc</span>
                 </div>
-                <button type="submit" name="search" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
+                <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
               </form>
             </div>
           </div>
