@@ -41,7 +41,6 @@ if (isset($_GET['foster_name']) && !empty($_GET['foster_name'])) {
     $search_result_fosters = $db->fetchAll($search_fosters);
     $merge_search_result = array_merge($search_result_fosters);
 }
-
 ?>
 
 <body>
@@ -134,7 +133,7 @@ if (isset($_GET['foster_name']) && !empty($_GET['foster_name'])) {
                         <div class="col-md-12 col-lg-8 col-xl-9">
                             <?php
                             if (empty($result_fosters)) { ?>
-                                <h6>No Data available 1</h6>
+                                <h6>No Data available </h6>
                             <?php }
                             foreach ($result_fosters as $foster) { ?>
                                 <div class="card">
@@ -213,7 +212,7 @@ if (isset($_GET['foster_name']) && !empty($_GET['foster_name'])) {
                         <div class="col-md-12 col-lg-8 col-xl-9">
                             <?php
                             if (empty($merge_search_result)) { ?>
-                                <h1>No Data available 2</h1>
+                                <h1>No Data available</h1>
                             <?php }
                             foreach ($merge_search_result as $foster) { ?>
                                 <div class="card">
