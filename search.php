@@ -263,19 +263,20 @@ if (isset($_GET['foster_name']) && !empty($_GET['foster_name'])) {
 
                                                 <div class="clinic-booking">
                                                     <a class="view-pro-btn" href="my-profile.php?uid=<?= $foster['verification_token'] ?>">View Profile</a>
+
                                                     <?php
                                                     $current_year = date('Y');
                                                     // echo explode("-", $foster['dob'])[0];
                                                     $age = $current_year - explode("-", $foster['dob'])[0];
 
                                                     if ($age < 18) { ?>
-                                                        <div class="col-6">
-                                                            <a href="backend/contact.php?uid=<?= $foster['verification_token'] ?>" disabled class=" btn btn-danger">Contact Home</a>
-                                                        </div>
+                                                        <!-- <div class="col-6"> -->
+                                                        <a class="apt-btn" href="backend/contact.php?uid=<?= $foster['verification_token'] ?>">Contact Social</a>
+                                                        <!-- </div> -->
                                                     <?php } else { ?>
-                                                        <div class="col-6">
-                                                            <a class="apt-btn" href="backend/add-connect.php?uid=<?= $foster['verification_token'] ?>">Add Connect</a>
-                                                        </div>
+                                                        <!-- <div class="col-6"> -->
+                                                        <a class="apt-btn" href="backend/add-connect.php?uid=<?= $foster['verification_token'] ?>">Add Connect</a>
+                                                        <!-- </div> -->
                                                     <?php } ?>
                                                 </div>
                                             </div>
