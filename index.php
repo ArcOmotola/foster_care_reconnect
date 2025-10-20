@@ -8,21 +8,6 @@ $db = new Database();
 //Check if foster home has data in the using country_id for USA which is 231
 $foster_home_sql = "SELECT * FROM foster_homes";
 $result_foster_home = $db->fetchAll($foster_home_sql);
-// if (empty($result_foster_home)) {
-//   //Insert dummy data into foster_homes table
-//   $insert_sql = "INSERT INTO foster_homes (foster_name, country_id, state_id, home_address, contact_number, cover_image, email, password) VALUES
-//     ('Happy Tails Foster Home', 231, 1, '123 Main St, Los Angeles, CA', '555-1234', 'cover1.jpg', 'dH1oX@example.com', md5('password10')),
-//     ('Safe Haven Foster Care', 231, 2, '456 Oak St, New York, NY', '555-5678', 'cover2.jpg', 'oV9mD@example.com', md5('password10')),
-//     ('Forever Friends Foster Home', 231, 3, '789 Pine St, Chicago, IL', '555-8765', 'cover3.jpg', 'a6TlO@example.com', md5('password10')),
-//     ('Loving Arms Foster Care', 231, 4, '321 Maple St, Houston, TX', '555-4321', 'cover4.jpg', 'qH1oX@example.com', md5('password10')),
-//     ('New Beginnings Foster Home', 231, 1, '654 Cedar St, Phoenix, AZ', '555-6789', 'cover5.jpg', 'lH1oX@example.com', md5('password10')),
-//     ('Bright Futures Foster Care', 231, 2, '987 Birch St, Philadelphia, PA', '555-9876', 'cover6.jpg', 'kH1oX@example.com', md5('password10')),
-//     ('Caring Hearts Foster Home', 231, 3, '147 Spruce St, San Antonio, TX', '555-2468', 'cover7.jpg', 'rH1oX@example.com', md5('password10')),
-//     ('Hopeful Hearts Foster Care', 231, 4, '258 Walnut St, Dallas, TX', '555-1357', 'cover8.jpg', 'wH1oX@example.com', md5('password10')),
-//     ('Second Chance Foster Home', 231, 1, '369 Chestnut St, San Diego, CA', '555-8642', 'cover9.jpg', 'xH1oX@example.com', md5('password10')),
-//     ('Healthy Hearts Foster Care', 231, 2, '789 Birch St, Austin, TX', '555-7531', 'cover10.jpg', 'yH1oX@example.com', md5('password10'));";
-//   $db->execute($insert_sql);
-// }
 
 //Display random 4 states from USA (country_id = 231)
 $state_sql = "SELECT name FROM states WHERE country_id = 231 ORDER BY RAND() LIMIT 4";
@@ -48,15 +33,17 @@ $result_foster_homes = $db->fetchAll($foster_homes);
 //foster mock generate
 $foster = "SELECT * FROM fosters";
 $result_fosters = $db->fetchAll($foster);
-if (empty($result_fosters)) {
-  //Insert dummy data into foster_homes table
-  $insert_sql = "INSERT INTO fosters (name, foster_home_id, email, password, address, ssn, phone_number ) VALUES
-    ('Omotola Jolade', 2, 'demo@test.com', md5('1234567890'), '123 Main St, Los Angeles, CA', '123-45-6789', '555-1234')";
-  $db->execute($insert_sql);
-}
+// if (empty($result_fosters)) {
+//   //Insert dummy data into foster_homes table
+//   $insert_sql = "INSERT INTO fosters (name, foster_home_id, email, password, address, ssn, phone_number ) VALUES
+//     ('Omotola Jolade', 2, 'demo@test.com', md5('1234567890'), '123 Main St, Los Angeles, CA', '123-45-6789', '555-1234')";
+//   $db->execute($insert_sql);
+// }
 
 $random_fosters = "SELECT * FROM fosters ORDER BY RAND() LIMIT 6";
 $result_fosters = $db->fetchAll($random_fosters);
+
+
 
 ?>
 
@@ -89,10 +76,10 @@ $result_fosters = $db->fetchAll($random_fosters);
             <div class="search-box">
               <form action="search.php" method="get">
                 <div class="form-group search-info">
-                  <input type="text" class="form-control" placeholder="Search name">
+                  <input type="text" class="form-control" placeholder="Search name" name="search">
                   <span class="form-text">Ex : City, State or Name for Check up etc</span>
                 </div>
-                <button type="submit" name="search" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
+                <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
               </form>
             </div>
           </div>
