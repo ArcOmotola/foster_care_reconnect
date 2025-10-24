@@ -23,6 +23,10 @@ $result_foster_homes = $db->fetchAll($foster_homes);
 $random_fosters = "SELECT * FROM fosters ORDER BY RAND() LIMIT 6";
 $result_fosters = $db->fetchAll($random_fosters);
 
+//Foster random memories
+$foster_experiences = "SELECT id,favourite_activities FROM foster_experiences ORDER BY RAND() LIMIT 15";
+$result_foster_experiences = $db->fetchAll($foster_experiences);
+
 //search feature
 $merge_search_result = [];
 if (isset($_GET['search']) && !empty($_GET['search'])) {
@@ -34,10 +38,10 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 }
 
 //Foster search name
-if (isset($_GET['foster_name']) && !empty($_GET['foster_name'])) {
-    $search = $_GET['foster_name'];
+if (isset($_GET['home_name']) && !empty($_GET['home_name'])) {
+    $home_id = $_GET['home_name'];
     //search fosters
-    $search_fosters = "SELECT * FROM fosters WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR phone_number LIKE '%$search%' OR address LIKE '%$search%'";
+    $search_fosters = "SELECT * FROM fosters WHERE foster_home_id LIKE '%$home_id%'";
     $search_result_fosters = $db->fetchAll($search_fosters);
     $merge_search_result = array_merge($search_result_fosters);
 }
@@ -89,7 +93,7 @@ if (isset($_GET['foster_name']) && !empty($_GET['foster_name'])) {
                                 <div class="card-body">
                                     <div class="filter-widget">
                                         <div class="cal-search">
-                                            <input type="text" name="foster_name" value="<?= isset($_GET['foster_name']) ? $_GET['foster_name'] : "" ?>" class="form-control" placeholder="Enter foster name, city, state">
+                                            <input type="text" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>" class="form-control" placeholder="Enter foster name, city, state">
                                         </div>
                                     </div>
                                     <div class="filter-widget">
@@ -111,16 +115,35 @@ if (isset($_GET['foster_name']) && !empty($_GET['foster_name'])) {
                                         foreach ($result_foster_homes as $home) { ?>
                                             <div>
                                                 <label class="custom_check">
-                                                    <input type="checkbox" name="home_name" value="<?= $home['foster_name'] ?? "" ?>">
+                                                    <input type="checkbox" name="home_name" value="<?= $home['id'] ?? "" ?>">
                                                     <span class="checkmark"></span> <?= $home['foster_name'] ?>
                                                 </label>
                                             </div>
                                         <?php }
                                         ?>
+                                    </div>
 
+                                    <div class="filter-widget">
+                                        <h4>#Memories</h4>
+                                        <?php
+                                        $memories = [];
+                                        foreach ($result_foster_experiences as $memoery) {
+                                            $memories[] = $memoery['favourite_activities'];
+                                        }
+                                        $memories = array_unique($memories);
+                                        foreach ($memories as $memory) {
+                                        ?>
+                                            <div>
+                                                <label class="custom_check">
+                                                    <input type="checkbox" name="home_name" value="<?= $memory ?? "" ?>">
+                                                    <span class="checkmark"></span> <?= $memory ?>
+                                                </label>
+                                            </div>
+                                        <?php }
+                                        ?>
                                     </div>
                                     <div class="btn-search">
-                                        <button type="submit" name="search" class="btn btn-block">Search</button>
+                                        <button type="submit" name="submit" class="btn btn-block">Search</button>
                                     </div>
                                 </div>
                             </div>
