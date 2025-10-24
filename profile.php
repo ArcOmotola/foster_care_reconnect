@@ -78,14 +78,8 @@ $merge_result = array_merge($connect_users, $connect_users_2);
                 <div class="row">
                     <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar dct-dashbd-lft">
 
-                        <!-- Profile Widget -->
-
-                        <!-- /Profile Widget -->
-
                         <?php require_once  ROOT_PATH . 'profile-menu.php'; ?>
-                        <!-- Last Booking -->
 
-                        <!-- /Last Booking -->
 
                     </div>
 
