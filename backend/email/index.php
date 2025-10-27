@@ -20,7 +20,6 @@ function generalEmailSender($subject, $email, $body, $recipient_name)
 
         $mail->SMTPDebug = 0;                                       // Enable verbose debug output
         $mail->isSMTP();                                            // Set mailer to use SMTP
-
         $mail->Host       = '';  // Specify main and backup SMTP servers
 
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -31,7 +30,7 @@ function generalEmailSender($subject, $email, $body, $recipient_name)
 
         $mail->SMTPSecure = 'ssl';                                  // Enable TLS encryption, [ICODE]ssl[/ICODE] also accepted
 
-        $mail->Port       = 465;                                    // TCP port to connect to
+        $mail->Port       = "";                                    // TCP port to connect to
 
 
 

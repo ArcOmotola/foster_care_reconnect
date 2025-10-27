@@ -123,6 +123,15 @@ if ($_GET['uid']) {
                                 </div>
                                 <div class="doctor-action">
 
+                                    <a href="chat.php?uid=<?= $result_user['verification_token'] ?>" class="btn btn-white msg-btn">
+                                        <i class="far fa-comment-alt"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
+                                        <i class="fas fa-phone"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
+                                        <i class="fas fa-video"></i>
+                                    </a>
                                 </div>
                                 <div class="clinic-booking">
                                     <?php

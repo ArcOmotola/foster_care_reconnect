@@ -26,7 +26,7 @@
             <ul>
                 <li>Phone <span><?= $result_user['phone_number'] ?></span></li>
                 <li>Age <span><?= $result_user['dob'] ?></span></li>
-                <li>SSN <span><?= $result_user['ssn'] ?></span></li>
+                <li>SSN <span><?= md5($result_user['ssn']) ?></span></li>
             </ul>
         </div>
     </div>
@@ -60,6 +60,19 @@
                 <a href="update-profile.php">
                     <i class="fas fa-user-cog"></i>
                     <span>Profile Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="connection-requests.php">
+                    <i class="fas fa-lock"></i>
+                    <span>Reconnect Requests</span>
+                </a>
+            </li>
+            <li>
+                <a href="app-notification.php">
+                    <i class="fas fa-comments"></i>
+                    <span>App Notifictions</span>
+                    <small class="unread-msg"><?= $count_notification ?? 0 ?></small>
                 </a>
             </li>
             <li>
