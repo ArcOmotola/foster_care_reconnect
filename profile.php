@@ -37,6 +37,14 @@ WHERE (connect_id = :foster_id)
 ORDER BY foster_connects.created_at DESC";
 $connect_users_2 = $db->fetchAll($connect_sql_2, ['foster_id' => $user_id]);
 $merge_result = array_merge($connect_users, $connect_users_2);
+
+
+
+//App notifications
+$app_sql = "SELECT * FROM app_notifications WHERE foster_id = :foster_id";
+$app_notifications = $db->fetch($app_sql, ['foster_id' => $user_id]);
+$count_notification = count($app_notifications);
+// var_dump($app_notifications);
 ?>
 
 <body>
@@ -113,6 +121,15 @@ $merge_result = array_merge($connect_users, $connect_users_2);
                                                     <ul>
                                                         <li>Phone <span><?= $connect['phone_number'] ?></span></li>
                                                         <li>Date of Birth <span><?= $connect['dob'] ?></span></li>
+                                                        <?php if ($connect['status'] == "pending") {
+                                                            echo "<li><button type=\"button\" class=\"btn btn-warning\">Pending</button></li>";
+                                                        } elseif ($connect['status'] == "accepted") {
+                                                            echo "<li><button type=\"button\" class=\"btn btn-success\">Accepted</button></li>";
+                                                        } else {
+                                                            echo "<li><button type=\"button\" class=\"btn btn-danger\">Rejected</button></li>";
+                                                        } ?>
+                                                        <!-- <li><button type="button" class="btn btn-rounded btn-warning">Warning</button></li> -->
+
                                                     </ul>
                                                 </div>
                                             </div>

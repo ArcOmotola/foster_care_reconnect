@@ -2,6 +2,7 @@
 session_start();
 require_once('../includes/config/path.php');
 require_once(ROOT_PATH . 'includes/function.php');
+require_once('email/index.php');
 
 $db = new Database();
 
@@ -32,6 +33,29 @@ if (!$db->CheckLogin()) {
             $sql = "INSERT INTO foster_connects (foster_id, connect_id) VALUES (:foster_id, :connect_id)";
             $result = $db->execute($sql, ['foster_id' => $foster_id, 'connect_id' => $connect_id]);
             if ($result) {
+                $notification_sql = "INSERT INTO app_notifications (foster_id, message) VALUES (:foster_id, :message)";
+                $notification_result = $db->execute(
+                    $notification_sql,
+                    [
+                        'foster_id' => $connect_id,
+                        'message' => "You have a new connect request"
+                    ]
+                );
+
+                //Send Email Notification
+                $to = $result_foster['email'];
+                $subject = "You have a new connect request!";
+                $verificationLink = $_SERVER['HTTP_ORIGIN'] . "/login.php";
+                $body = "
+                    <p>Hello $result_foster[name],</p>
+                    <p>We're pleased to notify you that $result_foster[name]  has requested to connect with you on Foster Care Reconnect.</p>
+                    <p>If you'd like to accept this request, please log into your account and approve it. You can manage your connections in your account settings.:</p>
+                    <p><a href='$verificationLink'>Login to Foster Care Reconnect</a></p>
+                    <p>Best regards,</p>
+                    <p>Foster Care Reconnect Team</p>
+                    ";
+                generalEmailSender($subject, $to, $body, $name);
+                $foster_id = $db->lastInsertId();
                 header("Location: " .  $_SERVER['HTTP_REFERER'] . "?success=" . "Connect request sent successfully");
                 exit;
             } else {

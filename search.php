@@ -45,6 +45,20 @@ if (isset($_GET['home_name']) && !empty($_GET['home_name'])) {
     $search_result_fosters = $db->fetchAll($search_fosters);
     $merge_search_result = array_merge($search_result_fosters);
 }
+
+//Foster memory name
+if (isset($_GET['memory']) && !empty($_GET['memory'])) {
+    $memory = $_GET['memory'];
+    //search fosters
+    $search_fosters = "SELECT foster_id FROM foster_experiences WHERE favourite_activities LIKE '%$memory%'";
+    $search_result_fosters = $db->fetchAll($search_fosters);
+    foreach ($search_result_fosters as $foster_id) {
+        $foster_id = $foster_id['foster_id'];
+        $search_fosters = "SELECT * FROM fosters WHERE id = '$foster_id'";
+        $search_result_fosters = $db->fetchAll($search_fosters);
+        $merge_search_result = array_merge($search_result_fosters);
+    }
+}
 ?>
 
 <body>
@@ -96,7 +110,7 @@ if (isset($_GET['home_name']) && !empty($_GET['home_name'])) {
                                             <input type="text" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>" class="form-control" placeholder="Enter foster name, city, state">
                                         </div>
                                     </div>
-                                    <div class="filter-widget">
+                                    <!-- <div class="filter-widget">
                                         <h4>State</h4>
                                         <?php
                                         foreach ($result_state as $state) { ?>
@@ -108,7 +122,7 @@ if (isset($_GET['home_name']) && !empty($_GET['home_name'])) {
                                             </div>
                                         <?php }
                                         ?>
-                                    </div>
+                                    </div> -->
                                     <div class="filter-widget">
                                         <h4>Homes</h4>
                                         <?php
@@ -127,15 +141,18 @@ if (isset($_GET['home_name']) && !empty($_GET['home_name'])) {
                                         <h4>#Memories</h4>
                                         <?php
                                         $memories = [];
-                                        foreach ($result_foster_experiences as $memoery) {
-                                            $memories[] = $memoery['favourite_activities'];
+                                        foreach ($result_foster_experiences as $memory) {
+                                            foreach (explode(',', $memory['favourite_activities']) as $memo) {
+                                                $memories[] = $memo;
+                                            }
                                         }
                                         $memories = array_unique($memories);
+
                                         foreach ($memories as $memory) {
                                         ?>
                                             <div>
                                                 <label class="custom_check">
-                                                    <input type="checkbox" name="home_name" value="<?= $memory ?? "" ?>">
+                                                    <input type="checkbox" name="memory" value="<?= $memory ?? "" ?>">
                                                     <span class="checkmark"></span> <?= $memory ?>
                                                 </label>
                                             </div>
