@@ -159,7 +159,7 @@ if (isset($_GET['success'])) {
 	<?php
 	require_once ROOT_PATH . 'includes/script.php';
 	?>
-	<!-- <script>
+	<script>
 		$(function() {
 			// alert("hello")
 			$('#country').on('change', function() {
@@ -195,7 +195,7 @@ if (isset($_GET['success'])) {
 
 			})
 		})
-	</script> -->
+	</script> 
 	<!-- <script src="assets/js/register.js"></script> -->
 </body>
 
