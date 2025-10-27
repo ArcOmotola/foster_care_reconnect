@@ -43,7 +43,11 @@ $merge_result = array_merge($connect_users, $connect_users_2);
 //App notifications
 $app_sql = "SELECT * FROM app_notifications WHERE foster_id = :foster_id";
 $app_notifications = $db->fetch($app_sql, ['foster_id' => $user_id]);
-$count_notification = count($app_notifications);
+if (empty($app_notifications)) {
+    $count_notification = 0;
+} else {
+    $count_notification = count($app_notifications);
+}
 // var_dump($app_notifications);
 ?>
 
