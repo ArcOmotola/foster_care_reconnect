@@ -231,7 +231,7 @@ if (isset($_GET['memory']) && !empty($_GET['memory'])) {
 
                                                     if ($age < 18) { ?>
                                                         <!-- <div class="col-6"> -->
-                                                        <a class="apt-btn" href="backend/contact.php?uid=<?= $foster['verification_token'] ?>">Contact Social</a>
+                                                        <a class="apt-btn" href="social-contact.php?uid=<?= $foster['verification_token'] ?>">Contact Social</a>
                                                         <!-- </div> -->
                                                     <?php } else { ?>
                                                         <!-- <div class="col-6"> -->
@@ -310,7 +310,7 @@ if (isset($_GET['memory']) && !empty($_GET['memory'])) {
 
                                                     if ($age < 18) { ?>
                                                         <!-- <div class="col-6"> -->
-                                                        <a class="apt-btn" href="backend/contact.php?uid=<?= $foster['verification_token'] ?>">Contact Social</a>
+                                                        <a class="apt-btn" href="social-contact.php?uid=<?= $foster['verification_token'] ?>">Contact Social</a>
                                                         <!-- </div> -->
                                                     <?php } else { ?>
                                                         <!-- <div class="col-6"> -->

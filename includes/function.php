@@ -62,6 +62,7 @@ class Database
             $this->ChatMessage();
             $this->AppNotifications();
             $this->CreateTwoFactorAuthenticationTable();
+            $this->SocialWorkerMessages();
         } catch (PDOException $e) {
             exit('Database Connection Failed: ' . $e->getMessage());
         }
@@ -356,6 +357,21 @@ class Database
         $this->pdo->exec($sql);
     }
 
+
+    public function SocialWorkerMessages()
+    {
+        $sql =  "CREATE TABLE IF NOT EXISTS social_worker_messages (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            foster_home_id INT NOT NULL,
+            foster_id INT NOT NULL,
+            message VARCHAR(255) NOT NULL,
+            status BOOLEAN DEFAULT FALSE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (foster_id) REFERENCES fosters(id) ON DELETE CASCADE,
+            FOREIGN KEY (foster_home_id) REFERENCES foster_homes(id) ON DELETE CASCADE
+        )";
+        $this->pdo->exec($sql);
+    }
     /*************  ✨ Windsurf Command ⭐  *************/
     /**
      * Executes a SELECT query and returns all the results.

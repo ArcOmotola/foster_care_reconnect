@@ -192,7 +192,7 @@ $result_fosters = $db->fetchAll($random_fosters);
 
                       if ($age < 18) { ?>
                         <div class="col-6">
-                          <a href="backend/contact.php?uid=<?= $foster['verification_token'] ?>" disabled class=" btn btn-danger">Minor</a>
+                          <a href="social-contact.php?uid=<?= $foster['verification_token'] ?>" disabled class=" btn btn-danger">Minor</a>
                         </div>
                       <?php } else { ?>
                         <div class="col-6">

@@ -139,7 +139,7 @@ if ($_GET['uid']) {
                                     // echo explode("-", $foster['dob'])[0];
                                     $age = $current_year - explode("-", $result_user['dob'])[0];
                                     if ($age < 18) { ?>
-                                        <a class="apt-btn" href="backend/contact.php?uid=<?= $result_user['verification_token'] ?>">Contact Home</a>
+                                        <a class="apt-btn" href="social-contact.php?uid=<?= $result_user['verification_token'] ?>">Contact Home</a>
                                     <?php } else { ?>
                                         <a class="apt-btn" href="backend/add-connect.php?uid=<?= $result_user['verification_token'] ?>">Add Connect</a>
                                     <?php }
