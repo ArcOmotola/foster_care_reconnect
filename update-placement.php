@@ -51,7 +51,7 @@ $result_foster_placements = $db->fetch($foster_placements, ['foster_id' => $resu
                     <div class="col-md-12 col-12">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Placement </li>
                             </ol>
                         </nav>
