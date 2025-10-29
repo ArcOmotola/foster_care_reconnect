@@ -44,7 +44,7 @@ $result_user = $db->fetch($user_sql, ['user_id' => $user_id]);
                     <div class="col-md-12 col-12">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
                             </ol>
                         </nav>

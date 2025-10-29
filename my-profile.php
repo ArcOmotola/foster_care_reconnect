@@ -67,7 +67,7 @@ if ($_GET['uid']) {
                     <div class="col-md-12 col-12">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
                             </ol>
                         </nav>
                         <h2 class="breadcrumb-title">Profile</h2>
