@@ -6,8 +6,15 @@ require_once(ROOT_PATH . 'includes/function.php');
 $db = new Database();
 
 //Foster
-$foster_homes = "SELECT * FROM foster_homes order by created_at";
+$foster_homes = "SELECT * FROM foster_homes ORDER BY created_at DESC";
 $result_foster_homes = $db->fetchAll($foster_homes);
+
+if (isset($_GET['error'])) {
+	$error_message = $_GET['error'];
+}
+if (isset($_GET['success'])) {
+	$success_message = $_GET['success'];
+}
 ?>
 
 <body>
@@ -38,8 +45,29 @@ $result_foster_homes = $db->fetchAll($foster_homes);
 								<li class="breadcrumb-item active">List</li>
 							</ul>
 						</div>
+						<?php
+						if (isset($error_message)) { ?>
+
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+								<strong>Error!</strong> <?= $error_message ?>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						<?php } elseif (isset($success_message)) { ?>
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+
+								<strong>Success!</strong><?= $success_message ?>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						<?php } ?>
+
+
 						<div class="col-sm-5 col">
-							<a href="add-home.php" class="btn btn-primary float-right mt-2">Add</a>
+							<a href="add-social-worker.php" class="btn btn-primary float-right mt-2">Add</a>
 						</div>
 					</div>
 				</div>

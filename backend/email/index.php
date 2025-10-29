@@ -30,7 +30,7 @@ function generalEmailSender($subject, $email, $body, $recipient_name)
 
         $mail->SMTPSecure = 'ssl';                                  // Enable TLS encryption, [ICODE]ssl[/ICODE] also accepted
 
-        $mail->Port       = "";                                    // TCP port to connect to
+        $mail->Port       = 465;                                    // TCP port to connect to
 
 
 

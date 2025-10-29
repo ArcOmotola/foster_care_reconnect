@@ -26,7 +26,7 @@ if (empty($admins)) {
 
 
 //Display random 8 foster homes from USA (country_id = 231)
-$foster_homes = "SELECT * FROM foster_homes WHERE country_id = 231 ORDER BY RAND() LIMIT 4";
+$foster_homes = "SELECT * FROM foster_homes WHERE country_id = 231 ORDER BY RAND() LIMIT 10";
 $result_foster_homes = $db->fetchAll($foster_homes);
 
 
@@ -105,6 +105,7 @@ $result_fosters = $db->fetchAll($random_fosters);
                   <h1>No Data available</h1>
                 <?php }
                 foreach ($result as $state) { ?>
+                  <!-- <a href="search.php?home_name=<?= $state['id'] ?>"> -->
                   <div class="speicality-item text-center">
                     <div class="speicality-img">
                       <img src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">
@@ -112,6 +113,7 @@ $result_fosters = $db->fetchAll($random_fosters);
                     </div>
                     <p><?= $state['name'] ?></p>
                   </div>
+                  <!-- </a> -->
                 <?php } ?>
                 <!-- /Slider Item -->
               </div>
@@ -190,7 +192,7 @@ $result_fosters = $db->fetchAll($random_fosters);
 
                       if ($age < 18) { ?>
                         <div class="col-6">
-                          <a href="backend/contact.php?uid=<?= $foster['verification_token'] ?>" disabled class=" btn btn-danger">Minor</a>
+                          <a href="social-contact.php?uid=<?= $foster['verification_token'] ?>" disabled class=" btn btn-danger">Minor</a>
                         </div>
                       <?php } else { ?>
                         <div class="col-6">
@@ -232,10 +234,12 @@ $result_fosters = $db->fetchAll($random_fosters);
                 <h1>No Data available</h1>
               <?php }
               foreach ($result_foster_homes as $homes) { ?>
-                <div class="feature-item text-center">
-                  <img src="assets/img/foster_homes/cover1.jpeg" class="img-fluid" alt="Feature">
-                  <p><?= $homes['foster_name'] ?></p>
-                </div>
+                <a href="search.php?home_name=<?= $homes['id'] ?>">
+                  <div class="feature-item text-center">
+                    <img src="assets/img/foster_homes/cover1.jpeg" class="img-fluid" alt="Feature">
+                    <p><?= $homes['foster_name'] ?></p>
+                  </div>
+                </a>
               <?php } ?>
 
               <!-- /Slider Item -->

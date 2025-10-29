@@ -118,6 +118,10 @@ $app_notifications = $db->fetch($app_sql, ['foster_id' => $user_id]);
                                                     </thead>
                                                     <tbody>
                                                         <?php
+                                                        if (empty($app_notifications)) {
+                                                            echo "<tr><td colspan='4'>No notifications found</td></tr>";
+                                                            exit;
+                                                        }
                                                         $sn = 0;
                                                         foreach ($app_notifications as $app_notification) {
                                                             $sn++;
