@@ -55,9 +55,9 @@ if (isset($_POST['submit'])) {
                 $_SESSION['name'] = $query['fosters_name'];
                 $_SESSION['email'] = $query['email'];
                 $_SESSION['last_login_time'] = time();
-                header("Location: ../social-auth-factor.php");
+                header("Location: ../social-members.php");
             } else {
-                header("Location: ../social-auth-factor.php");
+                header("Location: ../social-members.php");
             }
         }
     }
