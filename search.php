@@ -32,7 +32,7 @@ $merge_search_result = [];
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search = $_GET['search'];
     //search fosters
-    $search_fosters = "SELECT * FROM fosters WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR phone_number LIKE '%$search%' OR address LIKE '%$search%'";
+    $search_fosters = "SELECT * FROM fosters WHERE name LIKE '%$search%' OR email LIKE '%$search%' OR phone_number LIKE '%$search%' OR address LIKE '%$search%' OR maiden_name LIKE '%$search%'";
     $search_result_fosters = $db->fetchAll($search_fosters);
     $merge_search_result = array_merge($search_result_fosters);
 }
@@ -107,7 +107,7 @@ if (isset($_GET['memory']) && !empty($_GET['memory'])) {
                                 <div class="card-body">
                                     <div class="filter-widget">
                                         <div class="cal-search">
-                                            <input type="text" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>" class="form-control" placeholder="Enter foster name, city, state">
+                                            <input type="text" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>" class="form-control" placeholder="Enter foster name, city, state, maiden name...">
                                         </div>
                                     </div>
                                     <!-- <div class="filter-widget">

@@ -160,6 +160,14 @@ $result_logged = $db->fetch($logged_sql, ['foster_id' => $user_id]);
                                                 <input type="text" name="phone_number" class="form-control" value="<?= $result_user['phone_number'] ?>">
                                             </div>
                                         </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Maiden Name</label>
+                                                <input type="text" name="maiden_name" class="form-control" value="<?= $result_user['maiden_name'] ?>">
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="submit-section">
                                         <button type="submit" name="submit" class="btn btn-primary submit-btn">Save Changes</button>
