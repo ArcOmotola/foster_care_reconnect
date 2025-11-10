@@ -53,9 +53,9 @@ if (isset($_POST['submit'])) {
                 $_SESSION['name'] = 'Admin';
                 $_SESSION['email'] = $query['email'];
                 $_SESSION['last_admin_login_time'] = time();
-                header("Location: ../../admin/one-time-pass.php");
+                header("Location: ../../admin/index.php");
             } else {
-                header("Location: ../../admin/one-time-pass.php");
+                header("Location: ../../admin/index.php");
             }
         }
     }

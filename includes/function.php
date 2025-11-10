@@ -132,6 +132,7 @@ class Database
                 phone_number VARCHAR(255)  NULL,
                 profile_image VARCHAR(255) NULL,
                 dob VARCHAR(255) NULL,
+                maiden_name VARCHAR(255) NULL,
                 status BOOLEAN DEFAULT TRUE,
                 role ENUM('user') DEFAULT 'user',
                 is_verified BOOLEAN DEFAULT FALSE,

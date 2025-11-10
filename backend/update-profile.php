@@ -19,6 +19,8 @@ if (isset($_POST['submit'])) {
             $address =  trim(htmlspecialchars($_POST['address'], ENT_QUOTES, "UTF-8"));
             $ssn =  trim(htmlspecialchars($_POST['ssn'], ENT_QUOTES, "UTF-8"));
             $phone_number =  trim(htmlspecialchars($_POST['phone_number'], ENT_QUOTES, "UTF-8"));
+            $maiden_name =  trim(htmlspecialchars($_POST['maiden_name'], ENT_QUOTES, "UTF-8"));
+
             if ($name == "" || $dob == "" || $address == "" || $ssn == "" || $phone_number == "") {
                 $error_message = "Required field can not be empty";
                 header("Location: ../update-placement.php?error=" . $error_message);
@@ -70,13 +72,14 @@ if (isset($_POST['submit'])) {
                 $query = $db->fetch($sql, ['id' => $user_id]);
                 if (!empty($query)) {
                     $update_sql = "UPDATE fosters SET 
-                    name = :name,dob = :dob,address = :address,ssn = :ssn,phone_number = :phone_number, profile_image = :profile_image WHERE id = :id";
+                    name = :name,dob = :dob,address = :address,ssn = :ssn,phone_number = :phone_number, profile_image = :profile_image, maiden_name = :maiden_name WHERE id = :id";
                     $update_query = $db->execute($update_sql, [
                         'name' => $name,
                         'dob' => $dob,
                         'address' => $address,
                         'ssn' => $ssn,
                         'phone_number' => $phone_number,
+                        'maiden_name' => $maiden_name,
                         'profile_image' => $image_path ?? $query['profile_image'],
                         'id' => $user_id,
                     ]);
