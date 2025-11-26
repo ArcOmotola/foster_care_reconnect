@@ -13,6 +13,13 @@
 	//Foster
 	$fosters = "SELECT * FROM fosters order by created_at LIMIT 5";
 	$result_fosters = $db->fetchAll($fosters);
+
+	//Foster
+	$fosters_count = "SELECT * FROM fosters";
+	$result_foster_count = $db->fetchAll($fosters_count);
+
+	$foster_home_count = "SELECT * FROM foster_homes";
+	$result_foster_home_count = $db->fetchAll($foster_home_count);
 	?>
 
 
@@ -57,7 +64,7 @@
 											<i class="fe fe-users"></i>
 										</span>
 										<div class="dash-count">
-											<h3>10</h3>
+											<h3><?= count($result_foster_home_count) ?></h3>
 										</div>
 									</div>
 									<div class="dash-widget-info">
@@ -77,7 +84,7 @@
 											<i class="fe fe-user"></i>
 										</span>
 										<div class="dash-count">
-											<h3>6</h3>
+											<h3><?= count($result_foster_count) ?></h3>
 										</div>
 									</div>
 									<div class="dash-widget-info">
@@ -137,24 +144,8 @@
 						<div class="col-md-12 col-lg-6">
 
 							<!-- Sales Chart -->
-							<!-- <div class="card card-chart">
-								<div class="card-header">
-									<h4 class="card-title">Status</h4>
-								</div>
-								<div class="card-body">
-									<div id="morrisLine"></div>
-								</div>
-							</div> -->
-							<!-- /Sales Chart -->
 
-							<div class="card card-chart">
-								<div class="card-header">
-									<h4 class="card-title">Foster</h4>
-								</div>
-								<div class="card-body">
-									<div id="morrisArea"></div>
-								</div>
-							</div>
+							<!-- /Sales Chart -->
 
 						</div>
 
@@ -190,7 +181,7 @@
 														<td>
 															<h2 class="table-avatar">
 																<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpeg" alt="User Image"></a>
-																<a href="#"><?= $foster['name'] ?></a>
+																<a href="profile.html"><?= $foster['name'] ?></a>
 															</h2>
 														</td>
 														<td><?= $foster['email'] ?></td>
@@ -263,7 +254,6 @@
 		<!-- /Main Wrapper -->
 
 		<?php require_once('includes/script.php') ?>
-
 	</body>
 
 	<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:34 GMT -->
