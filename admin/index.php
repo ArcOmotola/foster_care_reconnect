@@ -137,8 +137,24 @@
 						<div class="col-md-12 col-lg-6">
 
 							<!-- Sales Chart -->
-
+							<!-- <div class="card card-chart">
+								<div class="card-header">
+									<h4 class="card-title">Status</h4>
+								</div>
+								<div class="card-body">
+									<div id="morrisLine"></div>
+								</div>
+							</div> -->
 							<!-- /Sales Chart -->
+
+							<div class="card card-chart">
+								<div class="card-header">
+									<h4 class="card-title">Foster</h4>
+								</div>
+								<div class="card-body">
+									<div id="morrisArea"></div>
+								</div>
+							</div>
 
 						</div>
 
@@ -174,7 +190,7 @@
 														<td>
 															<h2 class="table-avatar">
 																<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpeg" alt="User Image"></a>
-																<a href="profile.html"><?= $foster['name'] ?></a>
+																<a href="#"><?= $foster['name'] ?></a>
 															</h2>
 														</td>
 														<td><?= $foster['email'] ?></td>
@@ -247,6 +263,7 @@
 		<!-- /Main Wrapper -->
 
 		<?php require_once('includes/script.php') ?>
+
 	</body>
 
 	<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:34 GMT -->

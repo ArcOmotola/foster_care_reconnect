@@ -25,7 +25,7 @@ $user_sql = "SELECT * FROM fosters WHERE id = :user_id";
 $result_user = $db->fetch($user_sql, ['user_id' => $user_id]);
 
 $app_sql = "SELECT * FROM app_notifications WHERE foster_id = :foster_id";
-$app_notifications = $db->fetch($app_sql, ['foster_id' => $user_id]);
+$app_notifications = $db->fetchAll($app_sql, ['foster_id' => $user_id]);
 
 // var_dump($connect_users_2);
 ?>

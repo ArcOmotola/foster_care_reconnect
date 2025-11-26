@@ -11,9 +11,11 @@ if (!$db->CheckLogin()) {
     header("Location: " .  $_SERVER['HTTP_REFERER'] . "?error=" . "Please login to continue");
     exit;
 } else {
+
     if (isset($_GET['uid'])) {
         //get foster with the uid
         $uid = $_GET['uid'];
+
         $foster_sql = "SELECT * FROM fosters WHERE verification_token = :uid";
         $result_foster = $db->fetch($foster_sql, ['uid' => $uid]);
         if (empty($result_foster)) {
@@ -22,7 +24,10 @@ if (!$db->CheckLogin()) {
         } else {
             $connect_id = $result_foster['id'];
             $foster_id = $_SESSION['id'];
-
+            $foster = "SELECT * FROM fosters WHERE id = :foster_id";
+            $foster_result = $db->fetch($foster, [
+                'foster_id' => $foster_id
+            ]);
             //check if connect request already exists
             $connect_sql = "SELECT * FROM foster_connects WHERE foster_id = :foster_id AND connect_id = :connect_id";
             $result_connect = $db->fetch($connect_sql, ['foster_id' => $foster_id, 'connect_id' => $connect_id]);
@@ -33,12 +38,14 @@ if (!$db->CheckLogin()) {
             $sql = "INSERT INTO foster_connects (foster_id, connect_id) VALUES (:foster_id, :connect_id)";
             $result = $db->execute($sql, ['foster_id' => $foster_id, 'connect_id' => $connect_id]);
             if ($result) {
+
+                $message = isset($_GET['message']) ? $_GET['message'] : "";
                 $notification_sql = "INSERT INTO app_notifications (foster_id, message) VALUES (:foster_id, :message)";
                 $notification_result = $db->execute(
                     $notification_sql,
                     [
                         'foster_id' => $connect_id,
-                        'message' => "You have a new connect request"
+                        'message' => "You have a new connect request from " . $foster_result['name'] . " " . $message == "" ? "" : "Sender Message from Foster request: " . $message
                     ]
                 );
 

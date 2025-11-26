@@ -141,7 +141,10 @@ if ($_GET['uid']) {
                                     if ($age < 18) { ?>
                                         <a class="apt-btn" href="social-contact.php?uid=<?= $result_user['verification_token'] ?>">Contact Home</a>
                                     <?php } else { ?>
-                                        <a class="apt-btn" href="backend/add-connect.php?uid=<?= $result_user['verification_token'] ?>">Add Connect</a>
+                                        <!-- <a class="apt-btn" href="backend/add-connect.php?uid=<?= $result_user['verification_token'] ?>">Add Connect</a> -->
+                                        <!-- <a class="apt-btn" href="#add_time_slot">Add Connect</a> -->
+                                        <a class="apt-btn" data-toggle="modal" href="#add_time_slot"><i class="fa fa-plus-circle"></i> Add Connect</a>
+
                                     <?php }
                                     ?>
                                 </div>
@@ -401,7 +404,40 @@ if ($_GET['uid']) {
         </div>
     </div>
     <!-- Video Call Modal -->
+    <!-- Add Time Slot Modal -->
+    <div class="modal fade custom-modal" id="add_time_slot">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add a message </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="backend/add-connect.php" method="GET">
+                        <div class="hours-info">
+                            <div class="row form-row hours-cont">
+                                <div class="col-12 col-md-10">
+                                    <div class="row form-row">
+                                        <textarea name="message" id="message" class="form-control"></textarea>
+                                        <input type="hidden" name="uid" value="<?= $result_user['verification_token'] ?>">
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
 
+
+                        <div class="submit-section text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">Add Connect</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Add Time Slot Modal -->
     <?php
     require_once ROOT_PATH . 'includes/script.php';
     ?>
