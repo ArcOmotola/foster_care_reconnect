@@ -26,12 +26,19 @@
             <ul>
                 <li>Phone <span><?= $result_user['phone_number'] ?></span></li>
                 <li>Age <span><?= $result_user['dob'] ?></span></li>
-                <li>SSN <span><?= md5($result_user['ssn']) ?></span></li>
+                <li>SSN <span><?= str_replace(range(0, 9), '*', $result_user['ssn']) ?></span></li>
+
+
             </ul>
         </div>
     </div>
     <a href="update-profile.php" class="btn btn-sm bg-info-light">
         <i class="far fa-edit"></i> Update Profile
+    </a>
+
+    <br>
+    <a href="backend/delete-profile.php?id=<?= $result_user['id'] ?>" class="btn btn-sm bg-danger-light">
+        <i class="far fa-trash-alt"></i> Delete Account
     </a>
 </div>
 <div class="dashboard-widget">

@@ -116,7 +116,7 @@ if (isset($_GET['success'])) {
                                     <div class="appointment-list">
                                         <div class="profile-info-widget">
                                             <a href="patient-profile.html" class="booking-doc-img">
-                                                <img alt="User Image" src="<?= $child['profile_image'] == "" ? "assets/img/foster/foster-3.png" :  $connect['profile_image'] ?>">
+                                                <img alt="User Image" src="<?= $child['profile_image'] == "" ? "assets/img/foster/foster-3.png" :  $child['profile_image'] ?>">
                                             </a>
                                             <div class="profile-det-info">
                                                 <h3><a href="#"></a></h3>
