@@ -74,15 +74,15 @@
                         <div class="footer-contact-info">
                             <div class="footer-address">
                                 <span><i class="fas fa-map-marker-alt"></i></span>
-                                <p> 3556 Beech Street, San Francisco,<br> California, CA 94108 </p>
+                                <p> 1, University road Prairie view,,<br> 7744 Texas</p>
                             </div>
                             <p>
                                 <i class="fas fa-phone-alt"></i>
-                                +234-123-456-7890
+                                122-123-1111
                             </p>
                             <p class="mb-0">
                                 <i class="fas fa-envelope"></i>
-                                foster@info.com
+                                admin@fosterreconnect.online
                             </p>
                         </div>
                     </div>
