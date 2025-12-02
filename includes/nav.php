@@ -26,23 +26,14 @@
                     <a href="search.php">Fosters</a>
                 </li>
                 <li class="">
-                    <a href="#">About Us</a>
+                    <a href="about.php">About Us</a>
                 </li>
+
                 <li class="">
-                    <a href="#">⁠How it works</a>
+                    <a href="contact.php">Contact</a>
                 </li>
-                <li class="">
-                    <a href="#">Search</a>
-                </li>
-                <li class="">
-                    <a href="#">Contact</a>
-                </li>
-                <li class="">
-                    <a href="#">Resources</a>
-                </li>
-                <li class="">
-                    <a href="#">Contact</a>
-                </li>
+
+
                 <?php if (isset($_SESSION['last_login_time'])) { ?>
                     <li class="login-link">
                         <a href="profile.php">Profile</a>
