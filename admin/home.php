@@ -102,16 +102,14 @@ if (isset($_GET['success'])) {
 													<td><?= $home['contact_number'] ?></td>
 													<td><?= $home['created_at'] ?></td>
 
-													<!-- <td class="text-right">
+													<td class="text-right">
 														<div class="actions">
-															<a class="btn btn-sm bg-success-light" href="#">
+															<a class="btn btn-sm bg-success-light" href="edit-social-worker.php?id=<?= $home['id'] ?>">
 																<i class="fe fe-pencil"></i> Edit
 															</a>
-															<a class="btn btn-sm bg-danger-light">
-																<i class="fe fe-trash"></i> Delete
-															</a>
+
 														</div>
-													</td> -->
+													</td>
 												</tr>
 											<?php } ?>
 
